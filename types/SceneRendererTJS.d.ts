@@ -28,7 +28,7 @@ interface Renderer {
 interface Camera extends THREE.Camera {
     matrixAutoUpdate: boolean;
 }
-export declare class ThreejsRenderer {
+export declare class SceneRendererTJS {
     canvas_draw: HTMLCanvasElement;
     private camera;
     renderer: Renderer;

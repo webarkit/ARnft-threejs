@@ -39,7 +39,7 @@ interface Scene extends THREE.Scene {
   add: (node: THREE.Object3D) => this;
 }
 
-export class ThreejsRenderer {
+export class SceneRendererTJS {
   public canvas_draw: HTMLCanvasElement;
   private camera: Camera;
   public renderer: Renderer;
