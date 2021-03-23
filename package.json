@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "main": "src/ARnftThreejs.ts",
-  "types": "types/ARnftThreejs.d.ts"
+  "types": "types/ARnftThreejs.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-ts": "rimraf ./build && tsc && rollup -c"

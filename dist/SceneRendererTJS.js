@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { NFTNodeTJS } from './NFTRootTJS';
-export default class ThreejsRenderer {
+export class ThreejsRenderer {
     constructor(configData, canvasDraw, root, camera) {
         this.root = root;
         this.renderer = new THREE.WebGLRenderer({
