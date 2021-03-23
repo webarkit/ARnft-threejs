@@ -38,5 +38,6 @@ export declare class SceneRendererTJS {
     private extractor;
     initRenderer(): void;
     draw(): void;
+    static setMatrix(matrix: any, value: any): void;
 }
 export {};

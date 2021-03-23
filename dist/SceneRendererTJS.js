@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { NFTNodeTJS } from './NFTRootTJS';
 export class SceneRendererTJS {
     constructor(configData, canvasDraw, root, camera) {
         this.root = root;
@@ -29,7 +28,7 @@ export class SceneRendererTJS {
     initRenderer() {
         this.camera.matrixAutoUpdate = false;
         document.addEventListener('getProjectionMatrix', (ev) => {
-            NFTNodeTJS.setMatrix(this.camera.projectionMatrix, ev.detail.proj);
+            SceneRendererTJS.setMatrix(this.camera.projectionMatrix, ev.detail.proj);
         });
         this.scene.add(this.camera);
         const light = new THREE.AmbientLight(0xffffff);
@@ -51,5 +50,18 @@ export class SceneRendererTJS {
     draw() {
         this.renderer.render(this.scene, this.camera);
     }
+    static setMatrix(matrix, value) {
+        const array = [];
+        for (const key in value) {
+            array[key] = value[key];
+        }
+        if (typeof matrix.elements.set === 'function') {
+            matrix.elements.set(array);
+        }
+        else {
+            matrix.elements = [].slice.call(array);
+        }
+    }
+    ;
 }
 //# sourceMappingURL=SceneRendererTJS.js.map
