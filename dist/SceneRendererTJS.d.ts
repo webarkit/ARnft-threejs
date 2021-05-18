@@ -32,7 +32,6 @@ export declare class SceneRendererTJS {
     private root;
     private scene;
     constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, cameraBool: boolean);
-    private extractor;
     initRenderer(): void;
     draw(): void;
     static setMatrix(matrix: any, value: any): void;

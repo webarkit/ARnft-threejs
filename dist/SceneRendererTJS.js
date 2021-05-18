@@ -4,6 +4,7 @@ export class SceneRendererTJS {
     constructor(configData, canvasDraw, root, cameraBool) {
         console.log('inside Scene constructor');
         console.log(configData);
+        console.log(canvasDraw);
         this.root = root;
         this.renderer = new THREE.WebGLRenderer({
             canvas: canvasDraw,
@@ -24,9 +25,6 @@ export class SceneRendererTJS {
         else {
             this.camera = new THREE.Camera();
         }
-    }
-    extractor(camera) {
-        return camera;
     }
     initRenderer() {
         this.camera.matrixAutoUpdate = false;
