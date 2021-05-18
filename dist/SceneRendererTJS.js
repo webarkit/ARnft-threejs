@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { Utils } from './utils/Utils';
 export class SceneRendererTJS {
-    constructor(configData, canvasDraw, root, camera) {
+    constructor(configData, canvasDraw, root, cameraBool) {
         console.log(configData);
         this.root = root;
         this.renderer = new THREE.WebGLRenderer({
@@ -17,7 +17,7 @@ export class SceneRendererTJS {
         });
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.scene = new THREE.Scene();
-        if (this.extractor(camera)) {
+        if (cameraBool === true) {
             this.camera = new THREE.PerspectiveCamera(configData.camera.fov, configData.camera.ratio, configData.camera.near, configData.camera.far);
         }
         else {

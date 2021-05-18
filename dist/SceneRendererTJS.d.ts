@@ -25,16 +25,13 @@ interface Renderer {
     setPixelRatio: (pixelRatio: number) => void;
     setSize: (w: number, h: number) => void;
 }
-interface Camera extends THREE.Camera {
-    matrixAutoUpdate: boolean;
-}
 export declare class SceneRendererTJS {
     canvas_draw: HTMLCanvasElement;
     private camera;
     renderer: Renderer;
     private root;
     private scene;
-    constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, camera: Camera);
+    constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, cameraBool: boolean);
     private extractor;
     initRenderer(): void;
     draw(): void;
