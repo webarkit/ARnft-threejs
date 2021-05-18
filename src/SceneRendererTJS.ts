@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 //import {NFTNodeTJS} from './NFTRootTJS'
+import { Utils } from './utils/Utils'
+
 interface ConfigData {
   camera: {
     far: number;
@@ -82,13 +84,13 @@ export class SceneRendererTJS {
     const light = new THREE.AmbientLight(0xffffff)
     this.scene.add(light)
 
-    document.addEventListener('getMatrixGL_RH', (ev) => {
+    document.addEventListener('getMatrixGL_RH', (ev: any) => {
       this.root.visible = true
-      //const matrix = NFT.interpolate(ev.detail.matrixGL_RH)
-      //NFT.setMatrix(this.root.matrix, matrix)
+      const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
+      Utils.setMatrix(this.root.matrix, matrix)
     })
 
-    document.addEventListener('nftTrackingLost', (ev) => {
+    document.addEventListener('nftTrackingLost', (ev: any) => {
       this.root.visible = false
     })
 
