@@ -2,11 +2,12 @@ export class Utils {
     constructor() {
     }
     static interpolate(world) {
+        const interpolationFactor = 24;
         for (let i = 0; i < 16; i++) {
             this.trackedMatrix.delta[i] = world[i] - this.trackedMatrix.interpolated[i];
             this.trackedMatrix.interpolated[i] =
                 this.trackedMatrix.interpolated[i] +
-                    this.trackedMatrix.delta[i] / this.interpolationFactor;
+                    this.trackedMatrix.delta[i] / interpolationFactor;
         }
         return this.trackedMatrix.interpolated;
     }
@@ -41,5 +42,4 @@ Utils.trackedMatrix = {
         0, 0, 0, 0
     ]
 };
-Utils.interpolationFactor = 24;
 //# sourceMappingURL=Utils.js.map

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { Utils } from './utils/Utils';
 export class SceneRendererTJS {
     constructor(configData, canvasDraw, root, camera) {
+        console.log(configData);
         this.root = root;
         this.renderer = new THREE.WebGLRenderer({
             canvas: canvasDraw,
