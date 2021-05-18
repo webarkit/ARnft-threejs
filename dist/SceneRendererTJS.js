@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { Utils } from './utils/Utils';
 export class SceneRendererTJS {
     constructor(configData, canvasDraw, root, camera) {
         this.root = root;
@@ -35,6 +36,8 @@ export class SceneRendererTJS {
         this.scene.add(light);
         document.addEventListener('getMatrixGL_RH', (ev) => {
             this.root.visible = true;
+            const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
+            Utils.setMatrix(this.root.matrix, matrix);
         });
         document.addEventListener('nftTrackingLost', (ev) => {
             this.root.visible = false;
