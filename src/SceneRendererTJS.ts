@@ -48,6 +48,7 @@ export class SceneRendererTJS {
   private scene: Scene;
 
   constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, camera: Camera) {
+    console.log(configData);
     this.root = root
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvasDraw,
