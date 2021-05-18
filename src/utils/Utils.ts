@@ -17,16 +17,16 @@ export class Utils {
           0, 0, 0, 0
       ]
   }
-  private static interpolationFactor: number = 24
+  //private static interpolationFactor: number = 24
   static interpolate (world: any) {
-    //const interpolationFactor = 24
+    const interpolationFactor = 24
 
     // interpolate matrix
     for (let i = 0; i < 16; i++) {
       this.trackedMatrix.delta[i] = world[i] - this.trackedMatrix.interpolated[i]
       this.trackedMatrix.interpolated[i] =
                   this.trackedMatrix.interpolated[i] +
-                  this.trackedMatrix.delta[i] / this.interpolationFactor
+                  this.trackedMatrix.delta[i] / interpolationFactor
      }
      return this.trackedMatrix.interpolated
    }
