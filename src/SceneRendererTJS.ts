@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-//import {NFTNodeTJS} from './NFTRootTJS'
 import { Utils } from './utils/Utils'
 
 interface ConfigData {
