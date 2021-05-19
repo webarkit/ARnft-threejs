@@ -15,7 +15,6 @@ export default {
 			file: 'dist/ARnftThreejs.js',
 			sourcemap: true,
 			globals: {
-				// babylonjs: 'babylonjs',
 				three: "THREE"
 			}
 		}
