@@ -30,7 +30,7 @@ export class SceneRendererTJS {
         this.camera.matrixAutoUpdate = false;
         document.addEventListener('getProjectionMatrix', (ev) => {
             console.log("Proj matrix is:", ev.detail.proj);
-            SceneRendererTJS.setMatrix(this.camera.projectionMatrix, ev.detail.proj);
+            Utils.setMatrix(this.camera.projectionMatrix, ev.detail.proj);
         });
         this.scene.add(this.camera);
         const light = new THREE.AmbientLight(0xffffff);
@@ -55,18 +55,5 @@ export class SceneRendererTJS {
     draw() {
         this.renderer.render(this.scene, this.camera);
     }
-    static setMatrix(matrix, value) {
-        const array = [];
-        for (const key in value) {
-            array[key] = value[key];
-        }
-        if (typeof matrix.elements.set === 'function') {
-            matrix.elements.set(array);
-        }
-        else {
-            matrix.elements = [].slice.call(array);
-        }
-    }
-    ;
 }
 //# sourceMappingURL=SceneRendererTJS.js.map
