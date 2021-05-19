@@ -29,7 +29,7 @@ export class SceneRendererTJS {
     initRenderer() {
         this.camera.matrixAutoUpdate = false;
         document.addEventListener('getProjectionMatrix', (ev) => {
-            console.log(ev.detail.proj);
+            console.log("Proj matrix is:", ev.detail.proj);
             SceneRendererTJS.setMatrix(this.camera.projectionMatrix, ev.detail.proj);
         });
         this.scene.add(this.camera);
@@ -37,7 +37,7 @@ export class SceneRendererTJS {
         this.scene.add(light);
         document.addEventListener('getMatrixGL_RH', (ev) => {
             this.root.visible = true;
-            console.log(ev.detail.matrixGL_RH);
+            console.log("From Matrix GL: ", ev.detail.matrixGL_RH);
             const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
             Utils.setMatrix(this.root.matrix, matrix);
         });
