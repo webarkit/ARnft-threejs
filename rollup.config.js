@@ -27,6 +27,7 @@ export default {
 		typescript({
 			tsconfig: "tsconfig.json",
 			typescript: require('typescript'),
+			useTsconfigDeclarationDir: "./types",
 		}),
 		externalGlobals({
 			three: "THREE"
