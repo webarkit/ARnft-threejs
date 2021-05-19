@@ -48,9 +48,6 @@ export class SceneRendererTJS {
   private scene: Scene;
 
   constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, cameraBool: boolean) {
-    console.log('inside Scene constructor')
-    console.log(configData);
-    console.log(canvasDraw);
     this.root = root
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvasDraw,
@@ -75,7 +72,6 @@ export class SceneRendererTJS {
   initRenderer () {
     this.camera.matrixAutoUpdate = false
     document.addEventListener('getProjectionMatrix', (ev: any) => {
-        console.log("Proj matrix is:", ev.detail.proj)
       Utils.setMatrix(this.camera.projectionMatrix, ev.detail.proj)
     })
     this.scene.add(this.camera)
@@ -85,7 +81,6 @@ export class SceneRendererTJS {
 
     document.addEventListener('getMatrixGL_RH', (ev: any) => {
       this.root.visible = true
-      console.log("From Matrix GL: ", ev.detail.matrixGL_RH)
       const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
       Utils.setMatrix(this.root.matrix, matrix)
     })
