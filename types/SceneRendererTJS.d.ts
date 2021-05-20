@@ -29,9 +29,10 @@ export declare class SceneRendererTJS {
     canvas_draw: HTMLCanvasElement;
     private camera;
     renderer: Renderer;
+    private uuid;
     private root;
     private scene;
-    constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, cameraBool: boolean);
+    constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: any, cameraBool: boolean);
     initRenderer(): void;
     draw(): void;
 }
