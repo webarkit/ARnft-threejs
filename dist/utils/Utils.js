@@ -1,6 +1,4 @@
 export class Utils {
-    constructor() {
-    }
     static interpolate(world) {
         const interpolationFactor = 24;
         for (let i = 0; i < 16; i++) {
