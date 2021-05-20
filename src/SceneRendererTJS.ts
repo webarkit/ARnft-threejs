@@ -50,8 +50,6 @@ export class SceneRendererTJS {
 
   constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: any, cameraBool: boolean) {
     this.uuid = uuid
-    console.log(uuid);
-
     this.root = root
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvasDraw,
