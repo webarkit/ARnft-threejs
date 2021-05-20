@@ -32,7 +32,7 @@ export declare class SceneRendererTJS {
     private uuid;
     private root;
     private scene;
-    constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: any, cameraBool: boolean);
+    constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: string, cameraBool: boolean);
     initRenderer(): void;
     draw(): void;
 }
