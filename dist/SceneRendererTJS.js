@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 import { Utils } from './utils/Utils';
 export class SceneRendererTJS {
-    constructor(configData, canvasDraw, root, cameraBool) {
+    constructor(configData, canvasDraw, root, uuid, cameraBool) {
+        this.uuid = uuid;
+        console.log(uuid);
         this.root = root;
         this.renderer = new THREE.WebGLRenderer({
             canvas: canvasDraw,
@@ -31,7 +33,7 @@ export class SceneRendererTJS {
         this.scene.add(this.camera);
         const light = new THREE.AmbientLight(0xffffff);
         this.scene.add(light);
-        document.addEventListener('getMatrixGL_RH', (ev) => {
+        document.addEventListener('getMatrixGL_RH-' + this.uuid, (ev) => {
             this.root.visible = true;
             const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
             Utils.setMatrix(this.root.matrix, matrix);
