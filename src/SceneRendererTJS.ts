@@ -44,11 +44,11 @@ export class SceneRendererTJS {
   public canvas_draw: HTMLCanvasElement;
   private camera: Camera;
   public renderer: Renderer;
-  private uuid: any;
+  private uuid: string;
   private root: Root;
   private scene: Scene;
 
-  constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: any, cameraBool: boolean) {
+  constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: string, cameraBool: boolean) {
     this.uuid = uuid
     this.root = root
     this.renderer = new THREE.WebGLRenderer({
