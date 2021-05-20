@@ -44,10 +44,14 @@ export class SceneRendererTJS {
   public canvas_draw: HTMLCanvasElement;
   private camera: Camera;
   public renderer: Renderer;
+  private uuid: any;
   private root: Root;
   private scene: Scene;
 
-  constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, cameraBool: boolean) {
+  constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: any, cameraBool: boolean) {
+    this.uuid = uuid
+    console.log(uuid);
+
     this.root = root
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvasDraw,
@@ -79,7 +83,7 @@ export class SceneRendererTJS {
     const light = new THREE.AmbientLight(0xffffff)
     this.scene.add(light)
 
-    document.addEventListener('getMatrixGL_RH', (ev: any) => {
+    document.addEventListener('getMatrixGL_RH-' + this.uuid, (ev: any) => {
       this.root.visible = true
       const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
       Utils.setMatrix(this.root.matrix, matrix)
