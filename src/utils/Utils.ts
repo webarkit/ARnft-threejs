@@ -1,7 +1,4 @@
 export class Utils {
-  constructor(){
-    //this.trackedMatrix;
-  }
   private static trackedMatrix: any = {
       // for interpolation
       delta: [
