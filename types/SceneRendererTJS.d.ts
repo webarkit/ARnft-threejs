@@ -16,7 +16,7 @@ interface ConfigData {
         precision: string;
         stencil: boolean;
         premultipliedAlpha: boolean;
-        objVisibilty: boolean;
+        objVisibility: boolean;
     };
 }
 interface Root extends THREE.Object3D {

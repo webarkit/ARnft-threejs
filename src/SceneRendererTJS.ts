@@ -18,7 +18,7 @@ interface ConfigData {
     precision: string;
     stencil: boolean;
     premultipliedAlpha: boolean;
-    objVisibilty: boolean;
+    objVisibility: boolean;
   };
 
 }
@@ -91,7 +91,7 @@ export class SceneRendererTJS {
     })
 
     document.addEventListener('nftTrackingLost', (ev: any) => {
-      this.root.visible = this.configData.renderer.objVisibilty
+      this.root.visible = this.configData.renderer.objVisibility
     })
 
     this.root.visible = false

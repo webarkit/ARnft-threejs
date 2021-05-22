@@ -39,7 +39,7 @@ export class SceneRendererTJS {
             Utils.setMatrix(this.root.matrix, matrix);
         });
         document.addEventListener('nftTrackingLost', (ev) => {
-            this.root.visible = this.configData.renderer.objVisibilty;
+            this.root.visible = this.configData.renderer.objVisibility;
         });
         this.root.visible = false;
         this.scene.add(this.root);
