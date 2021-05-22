@@ -106,6 +106,34 @@ export class SceneRendererTJS {
     this.renderer.render(this.scene, this.camera)
   }
 
+  // getters
+
+  getRenderer(): Renderer {
+    return this.renderer
+  }
+
+  getScene(): Scene {
+    return this.scene
+  }
+
+  getCamera(): Camera {
+    return this.camera
+  }
+
+  // setters
+
+  setRenderer(renderer: Renderer) {
+    this.renderer = renderer
+  }
+
+  setScene(scene: Scene) {
+    this.scene = scene
+  }
+
+  setCamera(camera: Camera) {
+    this.camera = camera
+  }
+
   // tick to be implemented
   /* tick () {
     this.draw()
