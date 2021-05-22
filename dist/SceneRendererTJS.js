@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { Utils } from './utils/Utils';
 export class SceneRendererTJS {
     constructor(configData, canvasDraw, root, uuid, cameraBool) {
+        this.configData = configData;
         this.uuid = uuid;
         this.root = root;
         this.renderer = new THREE.WebGLRenderer({
@@ -38,7 +39,7 @@ export class SceneRendererTJS {
             Utils.setMatrix(this.root.matrix, matrix);
         });
         document.addEventListener('nftTrackingLost', (ev) => {
-            this.root.visible = false;
+            this.root.visible = this.configData.renderer.objVisibilty;
         });
         this.root.visible = false;
         this.scene.add(this.root);

@@ -16,6 +16,7 @@ interface ConfigData {
         precision: string;
         stencil: boolean;
         premultipliedAlpha: boolean;
+        objVisibilty: boolean;
     };
 }
 interface Root extends THREE.Object3D {
@@ -34,6 +35,7 @@ interface Scene extends THREE.Scene {
 export declare class SceneRendererTJS {
     canvas_draw: HTMLCanvasElement;
     private camera;
+    private configData;
     renderer: Renderer;
     private uuid;
     private root;
