@@ -18,6 +18,7 @@ interface ConfigData {
     precision: string;
     stencil: boolean;
     premultipliedAlpha: boolean;
+    objVisibilty: boolean;
   };
 
 }
@@ -43,12 +44,14 @@ interface Scene extends THREE.Scene {
 export class SceneRendererTJS {
   public canvas_draw: HTMLCanvasElement;
   private camera: Camera;
+  private configData: ConfigData;
   public renderer: Renderer;
   private uuid: string;
   private root: Root;
   private scene: Scene;
 
   constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: string, cameraBool: boolean) {
+    this.configData = configData
     this.uuid = uuid
     this.root = root
     this.renderer = new THREE.WebGLRenderer({
@@ -88,7 +91,7 @@ export class SceneRendererTJS {
     })
 
     document.addEventListener('nftTrackingLost', (ev: any) => {
-      this.root.visible = false
+      this.root.visible = this.configData.renderer.objVisibilty
     })
 
     this.root.visible = false
