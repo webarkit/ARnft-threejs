@@ -17,3 +17,18 @@ or load with raw.githack:
 ```html
 <script src="https://raw.githack.com/webarkit/ARnft-threejs/main/dist/ARnftThreejs.js"></script>
 ```
+
+or you can install from npm:
+
+```
+npm install @webarkit/arnft-threejs
+```
+
+or yarn:
+
+```
+yarn add @webarkit/arnft-threejs
+```
+
+## Features
+The library has **ES6** and typescript support. Type definitions are in the types folder.
