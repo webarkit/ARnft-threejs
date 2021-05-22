@@ -25,6 +25,12 @@ interface Renderer {
     setPixelRatio: (pixelRatio: number) => void;
     setSize: (w: number, h: number) => void;
 }
+interface Camera extends THREE.Camera {
+    matrixAutoUpdate: boolean;
+}
+interface Scene extends THREE.Scene {
+    add: (node: THREE.Object3D) => this;
+}
 export declare class SceneRendererTJS {
     canvas_draw: HTMLCanvasElement;
     private camera;
@@ -35,5 +41,11 @@ export declare class SceneRendererTJS {
     constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: string, cameraBool: boolean);
     initRenderer(): void;
     draw(): void;
+    getRenderer(): Renderer;
+    getScene(): Scene;
+    getCamera(): Camera;
+    setRenderer(renderer: Renderer): void;
+    setScene(scene: Scene): void;
+    setCamera(camera: Camera): void;
 }
 export {};

@@ -51,5 +51,23 @@ export class SceneRendererTJS {
     draw() {
         this.renderer.render(this.scene, this.camera);
     }
+    getRenderer() {
+        return this.renderer;
+    }
+    getScene() {
+        return this.scene;
+    }
+    getCamera() {
+        return this.camera;
+    }
+    setRenderer(renderer) {
+        this.renderer = renderer;
+    }
+    setScene(scene) {
+        this.scene = scene;
+    }
+    setCamera(camera) {
+        this.camera = camera;
+    }
 }
 //# sourceMappingURL=SceneRendererTJS.js.map
