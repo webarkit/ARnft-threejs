@@ -24,6 +24,8 @@ export class SceneRendererTJS {
         else {
             this.camera = new THREE.Camera();
         }
+        this.version = '0.1.0';
+        console.log("ARnftThreejs version: ", this.version);
     }
     initRenderer() {
         this.camera.matrixAutoUpdate = false;

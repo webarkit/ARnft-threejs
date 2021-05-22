@@ -49,6 +49,7 @@ export class SceneRendererTJS {
   private uuid: string;
   private root: Root;
   private scene: Scene;
+  private version: string;
 
   constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: string, cameraBool: boolean) {
     this.configData = configData
@@ -72,6 +73,8 @@ export class SceneRendererTJS {
     } else {
       this.camera = new THREE.Camera()
     }
+    this.version = '0.1.0'
+    console.log("ARnftThreejs version: ", this.version);
   }
 
   initRenderer () {

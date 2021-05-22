@@ -1,7 +1,7 @@
 {
-  "name": "arnft-threejs",
-  "version": "0.0.1",
-  "description": "",
+  "name": "@webarkit/arnft-threejs",
+  "version": "0.1.0",
+  "description": "The ARnft rendering engine, based on Three.js",
   "main": "src/ARnftThreejs.ts",
   "types": "types/ARnftThreejs.d.ts",
   "scripts": {
@@ -10,18 +10,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kalwalt/ARnft-threejs.git"
+    "url": "git+https://github.com/webarkit/ARnft-threejs.git"
   },
   "keywords": [
     "ARnft",
-    "Three.js"
+    "Three.js",
+    "Augmented-Reality",
+    "Image-Tracking",
+    "NFT",
+    "WebARKitLib",
+    "WebARKit",
+    "WebAR",
   ],
   "author": "Walter Perdan",
   "license": "LGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/kalwalt/ARnft-threejs/issues"
+    "url": "https://github.com/webarkit/ARnft-threejs/issues"
   },
-  "homepage": "https://github.com/kalwalt/ARnft-threejs#readme",
+  "homepage": "https://github.com/webarkit/ARnft-threejs#readme",
   "devDependencies": {
     "@types/node": "^14.14.13",
     "@types/three":"^0.126.1",
