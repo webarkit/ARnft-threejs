@@ -1,6 +1,6 @@
 import { PlaneGeometry, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-export class NFTaddTJS {
+export default class NFTaddTJS {
     constructor(root) {
         this.root = root;
     }
