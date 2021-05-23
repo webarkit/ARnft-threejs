@@ -10,7 +10,7 @@ interface ARvideo {
   play: () => void;
 }
 
-export class NFTaddTJS {
+export default class NFTaddTJS {
     private root: Object3D;
     constructor(root: Object3D) {
         this.root = root;
