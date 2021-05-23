@@ -1,2 +1,4 @@
-export * from "./SceneRendererTJS"
-export * from "./markermedia/NFTaddTJS"
+import { SceneRendererTJS } from "./SceneRendererTJS"
+import { NFTaddTJS } from "./markermedia/NFTaddTJS"
+
+export { SceneRendererTJS, NFTaddTJS }
