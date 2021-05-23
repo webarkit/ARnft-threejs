@@ -13,6 +13,7 @@ export default {
 			format: 'umd',
 			name: 'ARnftThreejs',
 			file: 'dist/ARnftThreejs.js',
+			interop: 'default',
 			sourcemap: true,
 			globals: {
 				three: "THREE"
