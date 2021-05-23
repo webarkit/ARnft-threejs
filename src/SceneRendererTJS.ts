@@ -41,7 +41,7 @@ interface Scene extends THREE.Scene {
   add: (node: THREE.Object3D) => this;
 }
 
-export class SceneRendererTJS {
+export default class SceneRendererTJS {
   public canvas_draw: HTMLCanvasElement;
   private camera: Camera;
   private configData: ConfigData;

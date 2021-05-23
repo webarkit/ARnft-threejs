@@ -1,5 +1,5 @@
 import { Object3D } from 'three';
-export declare class NFTaddTJS {
+export default class NFTaddTJS {
     private root;
     constructor(root: Object3D);
     add(mesh: Object3D): void;

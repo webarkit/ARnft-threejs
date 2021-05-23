@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { Utils } from './utils/Utils';
-export class SceneRendererTJS {
+export default class SceneRendererTJS {
     constructor(configData, canvasDraw, root, uuid, cameraBool) {
         this.configData = configData;
         this.uuid = uuid;
