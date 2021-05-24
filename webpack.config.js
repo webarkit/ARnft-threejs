@@ -14,6 +14,14 @@ module.exports = {
     // @see: https://github.com/webpack/webpack/issues/6522
     globalObject: 'this',
   },
+  externals: {
+    three: {
+      commonjs: 'three',
+      commonjs2: 'three',
+      amd: 'three',
+      root: 'THREE' // indicates global variable
+    }
+  },
   module: {
     rules: [
         {
