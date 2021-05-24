@@ -2,7 +2,7 @@
   "name": "@webarkit/arnft-threejs",
   "version": "0.1.0",
   "description": "The ARnft rendering engine, based on Three.js",
-  "main": "src/ARnftThreejs.js",
+  "main": "dist/ARnftThreejs.js",
   "types": "types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
