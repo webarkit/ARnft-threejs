@@ -4,7 +4,6 @@ module.exports = {
   entry: './src/index.ts',
   devtool: 'inline-source-map',
   output: {
-    //path: path.resolve('dist'),
     path: path.resolve(__dirname, 'dist'),
     filename: 'ARnftThreejs.js',
     library: 'ARnftThreejs',
@@ -24,15 +23,8 @@ module.exports = {
   },
   module: {
     rules: [
-        {
-            test: /\.m?js/,
-            resolve: {
-              fullySpecified: false,
-            },
-          },
       {
         test: /\.(j|t)sx?$/,
-        include: [path.resolve(__dirname, 'src'),],
         exclude: /node_modules/,
         use: [{
           loader: 'babel-loader',
@@ -53,11 +45,5 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-    // @see https://stackoverflow.com/questions/59487224/webpack-throws-error-with-emscripten-cant-resolve-fs
-    fallback: {
-      //fs: false,
-      //path: false,
-      //crypto: false,
-    }
   },
 };
