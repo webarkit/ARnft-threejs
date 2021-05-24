@@ -1,5 +1,5 @@
 # ARnft-threejs
-**ARnft-threejs** is the rendering engine for [ARnft](https://github.com/webarkit/ARnft).
+**ARnft-threejs** is the new rendering engine for [ARnft](https://github.com/webarkit/ARnft).
 It is based on [Three.js](https://github.com/mrdoob/three.js) !!
 
 ## Use the library
@@ -28,6 +28,12 @@ or yarn:
 
 ```
 yarn add @webarkit/arnft-threejs
+```
+
+and use it as a module:
+
+```javascript
+import ARnftThreejs from '@webarkit/arnft-threejs'
 ```
 
 ## Features
