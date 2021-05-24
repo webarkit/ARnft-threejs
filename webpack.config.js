@@ -12,12 +12,19 @@ module.exports = {
     // @see: https://github.com/webpack/webpack/issues/3929
     libraryExport: 'default',
     // @see: https://github.com/webpack/webpack/issues/6522
-    globalObject: 'typeof self !== \'undefined\' ? self : this',
+    globalObject: 'this',
   },
   module: {
     rules: [
+        {
+            test: /\.m?js/,
+            resolve: {
+              fullySpecified: false,
+            },
+          },
       {
-        test: /\.tsx?$/,
+        test: /\.(j|t)sx?$/,
+        include: [path.resolve(__dirname, 'src'),],
         exclude: /node_modules/,
         use: [{
           loader: 'babel-loader',
@@ -40,9 +47,9 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     // @see https://stackoverflow.com/questions/59487224/webpack-throws-error-with-emscripten-cant-resolve-fs
     fallback: {
-      fs: false,
-      path: false,
-      crypto: false,
+      //fs: false,
+      //path: false,
+      //crypto: false,
     }
   },
 };
