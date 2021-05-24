@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "The ARnft rendering engine, based on Three.js",
   "main": "src/ARnftThreejs.js",
-  "types": "types/ARnftThreejs.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-ts": "rimraf ./build && tsc && rollup -c",
