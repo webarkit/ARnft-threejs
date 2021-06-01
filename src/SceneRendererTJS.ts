@@ -92,8 +92,10 @@ export default class SceneRendererTJS {
       const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
       Utils.setMatrix(this.root.matrix, matrix)
     })
-
+    console.log(this.configData.renderer.objVisibility);
     document.addEventListener('nftTrackingLost', (ev: any) => {
+      console.log();
+
       this.root.visible = this.configData.renderer.objVisibility
     })
 
