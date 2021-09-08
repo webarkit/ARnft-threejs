@@ -5,6 +5,7 @@ import { Object3D,
          Mesh,
          MeshStandardMaterial } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { Utils } from '../utils/Utils'
 
 interface ARvideo {
   play: () => void;
@@ -19,25 +20,37 @@ export default class NFTaddTJS {
     private root: Object3D;
     private entities: Entity[] = [];
     private names: Array<string>;
-    constructor(root: Object3D) {
+    private uuid: string;
+    constructor(root: Object3D, uuid: string) {
         this.root = root;
+        this.uuid = uuid;
     }
     public add(mesh: Object3D, name: string) {
+        //mesh.matrixAutoUpdate = false;
         document.addEventListener('getNFTData', (ev: any) => {
             var msg = ev.detail
             mesh.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             mesh.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
         })
-        console.log('inside NFTaddTJS: ', name);
+        this.root.add(mesh);
         mesh.visible = false
-
-        document.addEventListener('markerFound-' + name, (ev: any) => {
-          console.log('found ', name);
+        document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
+          this.root.visible = true
           mesh.visible = true
+          const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
+          Utils.setMatrix(this.root.matrix, matrix)
+          console.log(mesh.name);
         })
 
+        /*document.addEventListener('markerFound-' + name, (ev: any) => {
+          console.log('found ', name);
+          mesh.visible = true
+        })*/
+        //console.log(mesh);
+
+        //mesh.matrixAutoUpdate = false;
+
         this.entities.push({name, mesh})
-        this.root.add(mesh);
     }
     public addModel (url: string, x: number, y: number, z: number, scale: number) {
         let model
