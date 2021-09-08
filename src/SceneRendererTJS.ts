@@ -87,7 +87,7 @@ export default class SceneRendererTJS {
     const light = new THREE.AmbientLight(0xffffff)
     this.scene.add(light)
 
-    names.forEach(name => {
+    /*names.forEach(name => {
       document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
         this.root.visible = true
         const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
@@ -97,7 +97,7 @@ export default class SceneRendererTJS {
         ev.target.dispatchEvent(markerFound)
       })
 
-    });
+    });*/
 
     /*document.addEventListener('getMatrixGL_RH-' + this.uuid, (ev: any) => {
       this.root.visible = true
