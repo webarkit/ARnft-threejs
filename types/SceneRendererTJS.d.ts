@@ -42,7 +42,7 @@ export default class SceneRendererTJS {
     private scene;
     private version;
     constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: string, cameraBool: boolean);
-    initRenderer(): void;
+    initRenderer(names: Array<string>): void;
     draw(): void;
     getRenderer(): Renderer;
     getScene(): Scene;

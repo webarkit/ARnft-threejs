@@ -10,17 +10,33 @@ interface ARvideo {
   play: () => void;
 }
 
+interface Entity {
+    name: string,
+    mesh: Object3D
+}
+
 export default class NFTaddTJS {
     private root: Object3D;
+    private entities: Entity[] = [];
+    private names: Array<string>;
     constructor(root: Object3D) {
         this.root = root;
     }
-    public add(mesh: Object3D) {
+    public add(mesh: Object3D, name: string) {
         document.addEventListener('getNFTData', (ev: any) => {
             var msg = ev.detail
             mesh.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             mesh.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
         })
+        console.log('inside NFTaddTJS: ', name);
+        mesh.visible = false
+
+        document.addEventListener('markerFound-' + name, (ev: any) => {
+          console.log('found ', name);
+          mesh.visible = true
+        })
+
+        this.entities.push({name, mesh})
         this.root.add(mesh);
     }
     public addModel (url: string, x: number, y: number, z: number, scale: number) {
