@@ -26,14 +26,12 @@ export default class NFTaddTJS {
         this.uuid = uuid;
     }
     public add(mesh: Object3D, name: string) {
-        //mesh.matrixAutoUpdate = false;
         document.addEventListener('getNFTData', (ev: any) => {
             var msg = ev.detail
             mesh.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             mesh.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
         })
         this.root.add(mesh);
-        mesh.visible = false
         document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
           this.root.visible = true
           mesh.visible = true
@@ -41,15 +39,9 @@ export default class NFTaddTJS {
           Utils.setMatrix(this.root.matrix, matrix)
           console.log(mesh.name);
         })
-
-        /*document.addEventListener('markerFound-' + name, (ev: any) => {
-          console.log('found ', name);
-          mesh.visible = true
-        })*/
-        //console.log(mesh);
-
-        //mesh.matrixAutoUpdate = false;
-
+        document.addEventListener('nftTrackingLost' + this.uuid + '-' + name, (ev: any) => {
+          mesh.visible = false
+        })
         this.entities.push({name, mesh})
     }
     public addModel (url: string, x: number, y: number, z: number, scale: number) {
