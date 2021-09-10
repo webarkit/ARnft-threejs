@@ -51,10 +51,9 @@ export default class SceneRendererTJS {
   private scene: Scene;
   private version: string;
 
-  constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: string, cameraBool: boolean) {
+  constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, uuid: string, cameraBool: boolean) {
     this.configData = configData
     this.uuid = uuid
-    this.root = root
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvasDraw,
       context: configData.renderer.context,
@@ -87,31 +86,6 @@ export default class SceneRendererTJS {
     const light = new THREE.AmbientLight(0xffffff)
     this.scene.add(light)
 
-    /*names.forEach(name => {
-      document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
-        this.root.visible = true
-        const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
-        Utils.setMatrix(this.root.matrix, matrix)
-        let eventName: string = 'markerFound-' + ev.detail.name;
-        const markerFound = new CustomEvent(eventName)
-        ev.target.dispatchEvent(markerFound)
-      })
-
-    });*/
-
-    /*document.addEventListener('getMatrixGL_RH-' + this.uuid, (ev: any) => {
-      this.root.visible = true
-      const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
-      Utils.setMatrix(this.root.matrix, matrix)
-    })*/
-
-    document.addEventListener('nftTrackingLost', (ev: any) => {
-      this.root.visible = this.configData.renderer.objVisibility
-    })
-
-    this.root.visible = false
-
-    this.scene.add(this.root)
     document.addEventListener('getWindowSize', (_ev: any) => {
       this.renderer.setSize(_ev.detail.sw, _ev.detail.sh)
     })

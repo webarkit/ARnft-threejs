@@ -1,5 +1,6 @@
 import { Object3D,
          PlaneGeometry,
+         Scene,
          TextureLoader,
          VideoTexture,
          Mesh,
@@ -21,8 +22,9 @@ export default class NFTaddTJS {
     private entities: Entity[] = [];
     private names: Array<string>;
     private uuid: string;
-    constructor(root: Object3D, uuid: string) {
+    constructor(root: Object3D, scene: Scene, uuid: string) {
         this.root = root;
+        this.scene = scene;
         this.uuid = uuid;
     }
     public add(mesh: Object3D, name: string) {
@@ -31,6 +33,7 @@ export default class NFTaddTJS {
             mesh.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             mesh.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
         })
+        this.scene.add(this.root);
         this.root.add(mesh);
         document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
           this.root.visible = true
@@ -40,6 +43,7 @@ export default class NFTaddTJS {
           console.log(mesh.name);
         })
         document.addEventListener('nftTrackingLost' + this.uuid + '-' + name, (ev: any) => {
+          this.root.visible = false
           mesh.visible = false
         })
         this.entities.push({name, mesh})
