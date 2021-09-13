@@ -21,6 +21,7 @@ export default class NFTaddTJS {
     private root: Object3D;
     private entities: Entity[] = [];
     private names: Array<string>;
+    private scene: Scene;
     private uuid: string;
     constructor(root: Object3D, scene: Scene, uuid: string) {
         this.root = root;
@@ -42,7 +43,7 @@ export default class NFTaddTJS {
           Utils.setMatrix(this.root.matrix, matrix)
           console.log(mesh.name);
         })
-        document.addEventListener('nftTrackingLost' + this.uuid + '-' + name, (ev: any) => {
+        document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
           this.root.visible = false
           mesh.visible = false
         })
