@@ -19,14 +19,12 @@ interface Entity {
 }
 
 export default class NFTaddTJS {
-    private root: Object3D;
     private entities: Entity[] = [];
     private names: Array<string>;
     private scene: Scene;
     private uuid: string;
-    constructor(root: Object3D, uuid: string) {
-        this.root = root;
-        this.scene = SceneRendererTJS.getGlobalScene(); 
+    constructor(uuid: string) {
+        this.scene = SceneRendererTJS.getGlobalScene();
         this.uuid = uuid;
     }
     public add(mesh: Object3D, name: string) {
@@ -35,17 +33,20 @@ export default class NFTaddTJS {
             mesh.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             mesh.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
         })
-        this.scene.add(this.root);
-        this.root.add(mesh);
+        const root = new Object3D();
+        root.name = 'root-' + name;
+        root.matrixAutoUpdate = false;
+        this.scene.add(root);
+        root.add(mesh);
         document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
-          this.root.visible = true
+          root.visible = true
           mesh.visible = true
           const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
-          Utils.setMatrix(this.root.matrix, matrix)
+          Utils.setMatrix(root.matrix, matrix)
           console.log(mesh.name);
         })
         document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
-          this.root.visible = false
+          root.visible = false
           mesh.visible = false
         })
         this.entities.push({name, mesh})
@@ -61,7 +62,7 @@ export default class NFTaddTJS {
             model.position.x = x
             model.position.y = y
             model.position.z = z
-            this.root.add(model)
+            //this.root.add(model)
         })
     }
     public addImage (imageUrl: string, color: string, scale: number) {
@@ -75,10 +76,10 @@ export default class NFTaddTJS {
             plane.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             plane.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
        })
-       this.root.add(plane)
+       //this.root.add(plane)
     }
     public addVideo (id: string, scale: number) {
-       const root = this.root
+       //const root = this.root
        const ARVideo: HTMLVideoElement = document.getElementById(id) as HTMLVideoElement;
        const texture = new VideoTexture(ARVideo as HTMLVideoElement)
        const mat = new MeshStandardMaterial({ color: 0xbbbbff, map: texture })
@@ -91,6 +92,6 @@ export default class NFTaddTJS {
            plane.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
            plane.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
        })
-       this.root.add(plane)
+       //this.root.add(plane)
     }
 }
