@@ -53,8 +53,12 @@ export default class NFTaddTJS {
         this.entities.push({name, mesh})
     }
 
-    public addModel (url: string, x: number, y: number, z: number, scale: number) {
-        let model
+    public addModel (url: string, name: string, x: number, y: number, z: number, scale: number) {
+        const root = new Object3D();
+        root.name = 'root-' + name;
+        root.matrixAutoUpdate = false;
+        this.scene.add(root);
+        let model: any
         /* Load Model */
         const threeGLTFLoader = new GLTFLoader()
         threeGLTFLoader.load(url, gltf => {
@@ -64,8 +68,19 @@ export default class NFTaddTJS {
             model.position.x = x
             model.position.y = y
             model.position.z = z
-            //this.root.add(model)
+            root.add(model)
         })
+        document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
+            root.visible = true
+            model.visible = true
+            const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
+            Utils.setMatrix(root.matrix, matrix)
+          })
+          document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
+            root.visible = false
+            model.visible = false
+          })
+          this.names.push(name);
     }
     public addImage (imageUrl: string, color: string, scale: number) {
        const planeGeom = new PlaneGeometry(1, 1, 1, 1)
