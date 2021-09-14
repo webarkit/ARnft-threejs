@@ -38,6 +38,7 @@ export default class SceneRendererTJS {
     private uuid;
     private root;
     private scene;
+    private static globalScene;
     private version;
     constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, uuid: string, cameraBool: boolean);
     initRenderer(names: Array<string>): void;
@@ -45,6 +46,7 @@ export default class SceneRendererTJS {
     getRenderer(): Renderer;
     getScene(): Scene;
     getCamera(): Camera;
+    static getGlobalScene(): Scene;
     setRenderer(renderer: Renderer): void;
     setScene(scene: Scene): void;
     setCamera(camera: Camera): void;

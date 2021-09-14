@@ -49,6 +49,7 @@ export default class SceneRendererTJS {
   private uuid: string;
   private root: Root;
   private scene: Scene;
+  private static globalScene: Scene;
   private version: string;
 
   constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, uuid: string, cameraBool: boolean) {
@@ -67,6 +68,7 @@ export default class SceneRendererTJS {
     })
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.scene = new THREE.Scene()
+    SceneRendererTJS.globalScene = this.scene
     if (cameraBool === true) {
       this.camera = new THREE.PerspectiveCamera( configData.camera.fov, configData.camera.ratio, configData.camera.near, configData.camera.far );
     } else {
@@ -110,6 +112,10 @@ export default class SceneRendererTJS {
 
   getCamera(): Camera {
     return this.camera
+  }
+
+  static getGlobalScene(): Scene {
+    return SceneRendererTJS.globalScene
   }
 
   // setters
