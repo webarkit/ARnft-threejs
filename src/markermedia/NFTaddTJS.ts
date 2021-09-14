@@ -7,6 +7,7 @@ import { Object3D,
          MeshStandardMaterial } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Utils } from '../utils/Utils'
+import SceneRendererTJS from '../SceneRendererTJS'
 
 interface ARvideo {
   play: () => void;
@@ -23,9 +24,9 @@ export default class NFTaddTJS {
     private names: Array<string>;
     private scene: Scene;
     private uuid: string;
-    constructor(root: Object3D, scene: Scene, uuid: string) {
+    constructor(root: Object3D, uuid: string) {
         this.root = root;
-        this.scene = scene;
+        this.scene = SceneRendererTJS.getGlobalScene(); 
         this.uuid = uuid;
     }
     public add(mesh: Object3D, name: string) {
