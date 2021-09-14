@@ -7,7 +7,7 @@ export default class NFTaddTJS {
     constructor(uuid: string);
     add(mesh: Object3D, name: string): void;
     addModel(url: string, name: string, x: number, y: number, z: number, scale: number): void;
-    addImage(imageUrl: string, color: string, scale: number): void;
+    addImage(imageUrl: string, name: string, color: string, scale: number): void;
     addVideo(id: string, scale: number): void;
     getNames(): string[];
 }
