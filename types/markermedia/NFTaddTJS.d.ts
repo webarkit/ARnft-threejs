@@ -9,4 +9,5 @@ export default class NFTaddTJS {
     addModel(url: string, x: number, y: number, z: number, scale: number): void;
     addImage(imageUrl: string, color: string, scale: number): void;
     addVideo(id: string, scale: number): void;
+    getNames(): string[];
 }

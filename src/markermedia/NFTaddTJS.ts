@@ -26,6 +26,7 @@ export default class NFTaddTJS {
     constructor(uuid: string) {
         this.scene = SceneRendererTJS.getGlobalScene();
         this.uuid = uuid;
+        this.names = [];
     }
     public add(mesh: Object3D, name: string) {
         document.addEventListener('getNFTData', (ev: any) => {
@@ -43,14 +44,15 @@ export default class NFTaddTJS {
           mesh.visible = true
           const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
           Utils.setMatrix(root.matrix, matrix)
-          console.log(mesh.name);
         })
         document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
           root.visible = false
           mesh.visible = false
         })
+        this.names.push(name);
         this.entities.push({name, mesh})
     }
+
     public addModel (url: string, x: number, y: number, z: number, scale: number) {
         let model
         /* Load Model */
@@ -93,5 +95,9 @@ export default class NFTaddTJS {
            plane.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
        })
        //this.root.add(plane)
+    }
+
+    public getNames() {
+      return this.names
     }
 }
