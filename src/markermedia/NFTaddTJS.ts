@@ -29,8 +29,8 @@ export default class NFTaddTJS {
         this.names = [];
     }
     public add(mesh: Object3D, name: string) {
-        document.addEventListener('getNFTData', (ev: any) => {
-            var msg = ev.detail
+        document.addEventListener('getNFTData-' + this.uuid + '-' + name, (ev: any) => {
+            var msg = ev.detail;
             mesh.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             mesh.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
         })
@@ -92,7 +92,7 @@ export default class NFTaddTJS {
       const material = new MeshStandardMaterial({ color: color, map: texture});
       const plane = new Mesh(planeGeom, material)
       plane.scale.set(scale, scale, scale)
-      document.addEventListener('getNFTData', (ev: any) => {
+      document.addEventListener('getNFTData-' + this.uuid + '-' + name, (ev: any) => {
             var msg = ev.detail
             plane.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             plane.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
@@ -122,7 +122,7 @@ export default class NFTaddTJS {
       const planeGeom = new PlaneGeometry(1, 1, 1, 1)
       const plane = new Mesh(planeGeom, mat)
       plane.scale.set(scale, scale, scale)
-      document.addEventListener('getNFTData', (ev: any) => {
+      document.addEventListener('getNFTData-' + this.uuid + '-' + name, (ev: any) => {
            var msg = ev.detail
            plane.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
            plane.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
