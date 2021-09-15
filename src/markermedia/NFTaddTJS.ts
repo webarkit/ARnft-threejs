@@ -87,47 +87,58 @@ export default class NFTaddTJS {
       root.name = 'root-' + name;
       root.matrixAutoUpdate = false;
       this.scene.add(root);
-       const planeGeom = new PlaneGeometry(1, 1, 1, 1)
-       const texture = new TextureLoader().load(imageUrl)
-       const material = new MeshStandardMaterial({ color: color, map: texture});
-       const plane = new Mesh(planeGeom, material)
-       plane.scale.set(scale, scale, scale)
-       document.addEventListener('getNFTData', (ev: any) => {
+      const planeGeom = new PlaneGeometry(1, 1, 1, 1)
+      const texture = new TextureLoader().load(imageUrl)
+      const material = new MeshStandardMaterial({ color: color, map: texture});
+      const plane = new Mesh(planeGeom, material)
+      plane.scale.set(scale, scale, scale)
+      document.addEventListener('getNFTData', (ev: any) => {
             var msg = ev.detail
             plane.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
             plane.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
-       })
-       root.add(plane)
-       document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
+      })
+      root.add(plane)
+      document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
            root.visible = true
            plane.visible = true
            const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
            Utils.setMatrix(root.matrix, matrix)
-         })
-         document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
+      })
+      document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
            root.visible = false
            plane.visible = false
-         })
-         this.names.push(name);
+      })
+      this.names.push(name);
     }
-    public addVideo (id: string, scale: number) {
+    public addVideo (id: string, name: string, scale: number) {
       const root = new Object3D();
       root.name = 'root-' + name;
       root.matrixAutoUpdate = false;
       this.scene.add(root);
-       const ARVideo: HTMLVideoElement = document.getElementById(id) as HTMLVideoElement;
-       const texture = new VideoTexture(ARVideo as HTMLVideoElement)
-       const mat = new MeshStandardMaterial({ color: 0xbbbbff, map: texture })
-       ARVideo.play()
-       const planeGeom = new PlaneGeometry(1, 1, 1, 1)
-       const plane = new Mesh(planeGeom, mat)
-       plane.scale.set(scale, scale, scale)
-       document.addEventListener('getNFTData', (ev: any) => {
+      const ARVideo: HTMLVideoElement = document.getElementById(id) as HTMLVideoElement;
+      const texture = new VideoTexture(ARVideo as HTMLVideoElement)
+      const mat = new MeshStandardMaterial({ color: 0xbbbbff, map: texture })
+      ARVideo.play()
+      const planeGeom = new PlaneGeometry(1, 1, 1, 1)
+      const plane = new Mesh(planeGeom, mat)
+      plane.scale.set(scale, scale, scale)
+      document.addEventListener('getNFTData', (ev: any) => {
            var msg = ev.detail
            plane.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
            plane.position.x = (msg.width / msg.dpi * 2.54 * 10) / 2.0
-       })
-       root.add(plane)
+      })
+      root.add(plane)
+      document.addEventListener('getMatrixGL_RH-' + this.uuid + '-' + name, (ev: any) => {
+           root.visible = true
+           plane.visible = true
+           const matrix = Utils.interpolate(ev.detail.matrixGL_RH)
+           Utils.setMatrix(root.matrix, matrix)
+      })
+      document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
+          root.visible = false
+          plane.visible = false
+      })
+      this.names.push(name);
     }
 
     public getNames() {
