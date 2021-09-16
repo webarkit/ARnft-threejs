@@ -78,7 +78,7 @@ export default class SceneRendererTJS {
     console.log("ARnftThreejs version: ", this.version);
   }
 
-  initRenderer (names:Array<string>) {
+  initRenderer () {
     this.camera.matrixAutoUpdate = false
     document.addEventListener('getProjectionMatrix', (ev: any) => {
       Utils.setMatrix(this.camera.projectionMatrix, ev.detail.proj)
