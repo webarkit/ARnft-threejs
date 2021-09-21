@@ -28,7 +28,7 @@ export default class NFTaddTJS {
         this.uuid = uuid;
         this.names = [];
     }
-    public add(mesh: Object3D, name: string) {
+    public add(mesh: Object3D, name: string, objVisibility: boolean) {
         document.addEventListener('getNFTData-' + this.uuid + '-' + name, (ev: any) => {
             var msg = ev.detail;
             mesh.position.y = (msg.height / msg.dpi * 2.54 * 10) / 2.0
@@ -46,8 +46,8 @@ export default class NFTaddTJS {
           Utils.setMatrix(root.matrix, matrix)
         })
         document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
-          root.visible = false
-          mesh.visible = false
+          root.visible = objVisibility
+          mesh.visible = objVisibility
         })
         this.names.push(name);
         this.entities.push({name, mesh})
