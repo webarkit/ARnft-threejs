@@ -53,7 +53,7 @@ export default class NFTaddTJS {
         this.entities.push({name, mesh})
     }
 
-    public addModel (url: string, name: string, x: number, y: number, z: number, scale: number) {
+    public addModel (url: string, name: string, x: number, y: number, z: number, scale: number,  objVisibility: boolean) {
         const root = new Object3D();
         root.name = 'root-' + name;
         root.matrixAutoUpdate = false;
@@ -77,12 +77,12 @@ export default class NFTaddTJS {
             Utils.setMatrix(root.matrix, matrix)
           })
           document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
-            root.visible = false
-            model.visible = false
+            root.visible = objVisibility
+            model.visible = objVisibility
           })
           this.names.push(name);
     }
-    public addImage (imageUrl: string, name: string, color: string, scale: number) {
+    public addImage (imageUrl: string, name: string, color: string, scale: number,  objVisibility: boolean) {
       const root = new Object3D();
       root.name = 'root-' + name;
       root.matrixAutoUpdate = false;
@@ -105,12 +105,12 @@ export default class NFTaddTJS {
            Utils.setMatrix(root.matrix, matrix)
       })
       document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
-           root.visible = false
-           plane.visible = false
+           root.visible = objVisibility
+           plane.visible = objVisibility
       })
       this.names.push(name);
     }
-    public addVideo (id: string, name: string, scale: number) {
+    public addVideo (id: string, name: string, scale: number,  objVisibility: boolean) {
       const root = new Object3D();
       root.name = 'root-' + name;
       root.matrixAutoUpdate = false;
@@ -135,8 +135,8 @@ export default class NFTaddTJS {
            Utils.setMatrix(root.matrix, matrix)
       })
       document.addEventListener('nftTrackingLost-' + this.uuid + '-' + name, (ev: any) => {
-          root.visible = false
-          plane.visible = false
+          root.visible = objVisibility
+          plane.visible = objVisibility
       })
       this.names.push(name);
     }
