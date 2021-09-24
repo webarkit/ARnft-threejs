@@ -19,8 +19,6 @@ interface ConfigData {
         objVisibility: boolean;
     };
 }
-interface Root extends THREE.Object3D {
-}
 interface Renderer {
     render: (scene: THREE.Scene, camera: THREE.Camera) => void;
     setPixelRatio: (pixelRatio: number) => void;
@@ -40,13 +38,15 @@ export default class SceneRendererTJS {
     private uuid;
     private root;
     private scene;
+    private static globalScene;
     private version;
-    constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, root: Root, uuid: string, cameraBool: boolean);
+    constructor(configData: ConfigData, canvasDraw: HTMLCanvasElement, uuid: string, cameraBool: boolean);
     initRenderer(): void;
     draw(): void;
     getRenderer(): Renderer;
     getScene(): Scene;
     getCamera(): Camera;
+    static getGlobalScene(): Scene;
     setRenderer(renderer: Renderer): void;
     setScene(scene: Scene): void;
     setCamera(camera: Camera): void;
