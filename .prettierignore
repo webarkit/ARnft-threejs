@@ -1,0 +1,9 @@
+# Ignore artifacts:
+dist
+docs
+node_modules
+types
+*.json
+*.js
+*.lock
+*.md
