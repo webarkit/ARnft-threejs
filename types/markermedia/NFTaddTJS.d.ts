@@ -3,6 +3,7 @@ export default class NFTaddTJS {
     private entities;
     private names;
     private scene;
+    private target;
     private uuid;
     constructor(uuid: string);
     add(mesh: Object3D, name: string, objVisibility: boolean): void;
