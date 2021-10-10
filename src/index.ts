@@ -1,4 +1,4 @@
-import SceneRendererTJS from "./SceneRendererTJS"
-import NFTaddTJS from "./markermedia/NFTaddTJS"
+import SceneRendererTJS from "./SceneRendererTJS";
+import NFTaddTJS from "./markermedia/NFTaddTJS";
 
-export default { SceneRendererTJS, NFTaddTJS }
+export default { SceneRendererTJS, NFTaddTJS };
