@@ -48,6 +48,7 @@ export default class SceneRendererTJS {
   public renderer: Renderer;
   private uuid: string;
   private root: Root;
+   private target: EventTarget;
   private scene: Scene;
   private static globalScene: Scene;
   private version: string;
@@ -55,6 +56,7 @@ export default class SceneRendererTJS {
   constructor (configData: ConfigData, canvasDraw: HTMLCanvasElement, uuid: string, cameraBool: boolean) {
     this.configData = configData
     this.uuid = uuid
+    this.target = window || global;
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvasDraw,
       context: configData.renderer.context,
@@ -80,7 +82,7 @@ export default class SceneRendererTJS {
 
   initRenderer () {
     this.camera.matrixAutoUpdate = false
-    document.addEventListener('getProjectionMatrix', (ev: any) => {
+    this.target.addEventListener('getProjectionMatrix', (ev: any) => {
       Utils.setMatrix(this.camera.projectionMatrix, ev.detail.proj)
     })
     this.scene.add(this.camera)
@@ -88,12 +90,12 @@ export default class SceneRendererTJS {
     const light = new THREE.AmbientLight(0xffffff)
     this.scene.add(light)
 
-    document.addEventListener('getWindowSize', (_ev: any) => {
+    this.target.addEventListener('getWindowSize', (_ev: any) => {
       this.renderer.setSize(_ev.detail.sw, _ev.detail.sh)
     })
 
     const setInitRendererEvent = new CustomEvent('onInitThreejsRendering', { detail: { renderer: this.renderer, scene: this.scene,  camera: this.camera } })
-    document.dispatchEvent(setInitRendererEvent)
+    this.target.dispatchEvent(setInitRendererEvent)
   }
 
   draw () {
