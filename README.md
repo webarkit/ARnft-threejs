@@ -39,6 +39,14 @@ import ARnftThreejs from '@webarkit/arnft-threejs'
 ## Features
 The library has **ES6** and typescript support. Type definitions are in the types folder.
 
+## Build the docs
+If you want to read the API doc run in the console:
+
+```
+yarn docs
+```
+and then access the generated html pages with a localhost server.
+
 ## Build the project
 If you make changes to the project to the source code , then you need to build it again:
 
