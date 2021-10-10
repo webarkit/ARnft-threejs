@@ -10,7 +10,7 @@ You can clone with git:
 
 and then get the library in the dist folder:
 ```html
-<script src="../dist/ARnftThreejs.js"></script>
+<script src="path/to/ARnftThreejs.js"></script>
 ```
 or load with raw.githack:
 
@@ -38,3 +38,15 @@ import ARnftThreejs from '@webarkit/arnft-threejs'
 
 ## Features
 The library has **ES6** and typescript support. Type definitions are in the types folder.
+
+## Build the project
+If you make changes to the project to the source code , then you need to build it again:
+
+```
+yarn dev-ts // for a development build
+
+yarn build-ts // for a production build
+```
+## Contributing to the project
+
+Contributions are very welcome! if you want to contribute read our [CONTRIBUTING](https://github.com/webarkit/ARnft-threejs/blob/main/CONTRIBUTING.md) page.
