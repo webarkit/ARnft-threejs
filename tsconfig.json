@@ -36,6 +36,15 @@
     "dom",
     "es5"
   ],
+   "typedocOptions": {
+    "entryPoints": [
+      "src/index.ts",
+      "src/SceneRendererTJS.ts",
+      "src/utils/Utils.ts",
+      "src/markermedia/NFTaddTJS.ts",
+    ],
+    "out": "docs"
+    },
   "include": [
     "src/**/*"
   ]
