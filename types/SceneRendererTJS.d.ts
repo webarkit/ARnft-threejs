@@ -37,6 +37,7 @@ export default class SceneRendererTJS {
     renderer: Renderer;
     private uuid;
     private root;
+    private target;
     private scene;
     private static globalScene;
     private version;
