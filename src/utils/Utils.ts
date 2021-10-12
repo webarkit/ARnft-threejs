@@ -1,3 +1,6 @@
+export function getTime(): number {
+    return Math.floor(Date.now() / 1000);
+}
 export class Utils {
     private static trackedMatrix: any = {
         // for interpolation
