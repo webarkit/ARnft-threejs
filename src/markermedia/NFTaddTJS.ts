@@ -1,6 +1,7 @@
-import { Object3D, PlaneGeometry, Scene, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial } from "three";
+import { Object3D, PlaneGeometry, Scene, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial, Vector3 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
+import { ARnftFilter } from '../filters/ARnftFilter'
 import SceneRendererTJS from "../SceneRendererTJS";
 
 interface ARvideo {
@@ -18,11 +19,13 @@ export default class NFTaddTJS {
     private scene: Scene;
     private target: EventTarget;
     private uuid: string;
+    private _filter: ARnftFilter;
     constructor(uuid: string) {
         this.scene = SceneRendererTJS.getGlobalScene();
         this.target = window || global;
         this.uuid = uuid;
         this.names = [];
+        this._filter = new ARnftFilter();
     }
     public add(mesh: Object3D, name: string, objVisibility: boolean) {
         this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
@@ -38,8 +41,16 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             mesh.visible = true;
-            const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-            Utils.setMatrix(root.matrix, matrix);
+
+            let filter = this._filter.update(ev.detail.matrixGL_RH)
+
+            console.log("position from filter is: ", filter[0]);
+            console.log("rotation from filter is: ", filter[1]);
+            
+            root.position.setX((filter[0].x));
+            root.position.setY((filter[0].y));
+            root.position.setZ((filter[0].z));
+            root.rotation.setFromVector3(filter[1])
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;

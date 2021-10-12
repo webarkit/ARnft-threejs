@@ -5,6 +5,7 @@ export default class NFTaddTJS {
     private scene;
     private target;
     private uuid;
+    private _filter;
     constructor(uuid: string);
     add(mesh: Object3D, name: string, objVisibility: boolean): void;
     addModel(url: string, name: string, x: number, y: number, z: number, scale: number, objVisibility: boolean): void;

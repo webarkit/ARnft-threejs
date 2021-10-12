@@ -13,6 +13,6 @@ export declare class ARnftFilter {
     filterBeta: number;
     filterDcutoff: number;
     constructor();
-    update(world: any): Vector3;
+    update(world: any): Vector3[];
     protected getArrayMatrix(value: any): any;
 }

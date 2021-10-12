@@ -34,12 +34,12 @@ export class ARnftFilter {
         this._rotationFilter = new OneEuroFilterVector3(this.filterFrequency * 2);
     }
 
-    public update(world: any): Vector3 {
+    public update(world: any): Vector3[] {
         if (!world) {
             this._hasFound = false;
             this._frameDrops = 0;
         } else {
-            console.log('inside loop');
+            //console.log('inside loop');
             
             //let worldMatrix: Matrix = Matrix.FromArray(this.getArrayMatrix(this.world));
             let matrixW: Matrix4 = new Matrix4();
@@ -85,8 +85,8 @@ export class ARnftFilter {
 
 
             //let rotMatrix: Matrix = matrix.getRotationMatrix();
-            let rotMatrix: Matrix4 = new Matrix4();
-            rotMatrix.extractRotation(matrix);
+            //let rotMatrix: Matrix4 = new Matrix4(); // this is not neede because we decompose the matrix
+            //rotMatrix.extractRotation(matrix);
             //let rotation: Quaternion = new Quaternion().setFromRotationMatrix(rotMatrix); //this is wrong , will do nothing!
             let rotation: Quaternion = new Quaternion()
             ///this._root.rotation = this._rotationFilter.Filter(rotation.toEulerAngles()); // Babylon code
@@ -113,7 +113,7 @@ export class ARnftFilter {
             let finalRot = new Quaternion();
             finalRot.setFromRotationMatrix(rotationMatrix)*/
             //out.compose(pos, ) /// will see if output the matrix in a future...
-            return pos
+            return [pos, rotationVec, scale]
         }
     }
     protected getArrayMatrix(value: any): any {
