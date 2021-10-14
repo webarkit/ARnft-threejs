@@ -12,6 +12,13 @@ interface Entity {
     mesh: Object3D;
 }
 
+interface IPlaneConfig {
+    width: number;
+    height: number;
+    widthSegments: number;
+    heightSegments: number;
+}
+
 export default class NFTaddTJS {
     private entities: Entity[] = [];
     private names: Array<string>;
@@ -78,12 +85,12 @@ export default class NFTaddTJS {
         });
         this.names.push(name);
     }
-    public addImage(imageUrl: string, name: string, color: string, scale: number, objVisibility: boolean) {
+    public addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean) {
         const root = new Object3D();
         root.name = "root-" + name;
         root.matrixAutoUpdate = false;
         this.scene.add(root);
-        const planeGeom = new PlaneGeometry(1, 1, 1, 1);
+        const planeGeom = new PlaneGeometry(configs.width, configs.height, configs.widthSegments, configs.heightSegments);
         const texture = new TextureLoader().load(imageUrl);
         const material = new MeshStandardMaterial({ color: color, map: texture });
         const plane = new Mesh(planeGeom, material);
@@ -106,7 +113,7 @@ export default class NFTaddTJS {
         });
         this.names.push(name);
     }
-    public addVideo(id: string, name: string, scale: number, objVisibility: boolean) {
+    public addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean) {
         const root = new Object3D();
         root.name = "root-" + name;
         root.matrixAutoUpdate = false;
@@ -115,7 +122,7 @@ export default class NFTaddTJS {
         const texture = new VideoTexture(ARVideo as HTMLVideoElement);
         const mat = new MeshStandardMaterial({ color: 0xbbbbff, map: texture });
         ARVideo.play();
-        const planeGeom = new PlaneGeometry(1, 1, 1, 1);
+        const planeGeom = new PlaneGeometry(configs.width, configs.height, configs.widthSegments, configs.heightSegments);
         const plane = new Mesh(planeGeom, mat);
         plane.scale.set(scale, scale, scale);
         this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
