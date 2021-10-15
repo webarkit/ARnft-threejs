@@ -12,11 +12,18 @@ interface Entity {
     mesh: Object3D;
 }
 
+/**
+ * Interface to define the PlaneGeometry used in the addImage and addVideo functions.
+ * @param w  width of the PlaneGeometry.
+ * @param h height of the PlaneGeometry.
+ * @param ws width number of segments of the PlaneGeometry.
+ * @param hs height number of segments of the PlaneGeometry.
+ */
 interface IPlaneConfig {
-    width: number;
-    height: number;
-    widthSegments: number;
-    heightSegments: number;
+    w: number;
+    h: number;
+    ws: number;
+    hs: number;
 }
 
 export default class NFTaddTJS {
@@ -85,12 +92,19 @@ export default class NFTaddTJS {
         });
         this.names.push(name);
     }
-    public addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean) {
+    public addImage(
+        imageUrl: string,
+        name: string,
+        color: string,
+        scale: number,
+        configs: IPlaneConfig,
+        objVisibility: boolean
+    ) {
         const root = new Object3D();
         root.name = "root-" + name;
         root.matrixAutoUpdate = false;
         this.scene.add(root);
-        const planeGeom = new PlaneGeometry(configs.width, configs.height, configs.widthSegments, configs.heightSegments);
+        const planeGeom = new PlaneGeometry(configs.w, configs.h, configs.ws, configs.hs);
         const texture = new TextureLoader().load(imageUrl);
         const material = new MeshStandardMaterial({ color: color, map: texture });
         const plane = new Mesh(planeGeom, material);
@@ -122,7 +136,7 @@ export default class NFTaddTJS {
         const texture = new VideoTexture(ARVideo as HTMLVideoElement);
         const mat = new MeshStandardMaterial({ color: 0xbbbbff, map: texture });
         ARVideo.play();
-        const planeGeom = new PlaneGeometry(configs.width, configs.height, configs.widthSegments, configs.heightSegments);
+        const planeGeom = new PlaneGeometry(configs.w, configs.h, configs.ws, configs.hs);
         const plane = new Mesh(planeGeom, mat);
         plane.scale.set(scale, scale, scale);
         this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
