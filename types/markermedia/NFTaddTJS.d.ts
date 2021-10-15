@@ -1,9 +1,9 @@
 import { Object3D } from "three";
 interface IPlaneConfig {
-    width: number;
-    height: number;
-    widthSegments: number;
-    heightSegments: number;
+    w: number;
+    h: number;
+    ws: number;
+    hs: number;
 }
 export default class NFTaddTJS {
     private entities;
