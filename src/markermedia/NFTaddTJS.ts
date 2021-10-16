@@ -3,13 +3,20 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
 import SceneRendererTJS from "../SceneRendererTJS";
 
+/**
+ * Interface to define the ARVideo object used in addVideo.
+ * @param play play a video.
+ */
 interface ARvideo {
     play: () => void;
 }
 
+/**
+ * Interface to define an Entity.
+ * @param name the name of the Entity
+ */
 interface Entity {
     name: string;
-    mesh: Object3D;
 }
 
 /**
@@ -26,18 +33,33 @@ interface IPlaneConfig {
     hs: number;
 }
 
+/**
+ * This class is responsable to attach Threejs object to the rendering root and pass matrix data to it.
+ */
 export default class NFTaddTJS {
     private entities: Entity[] = [];
     private names: Array<string>;
     private scene: Scene;
     private target: EventTarget;
     private uuid: string;
+
+    /**
+     * The NFTaddTJS constuctor, you need to pass the uuid from the ARnft instance.
+     * @param uuid the uuid.
+     */
     constructor(uuid: string) {
         this.scene = SceneRendererTJS.getGlobalScene();
         this.target = window || global;
         this.uuid = uuid;
         this.names = [];
     }
+
+    /**
+     * The add function will add a mesh to the Renderer root. You need to associate a name of the Entity.
+     * @param mesh The mesh to add
+     * @param name the name of the Entity associated.
+     * @param objVisibility set true or false if the mesh wll stay visible or not after tracking.
+     */
     public add(mesh: Object3D, name: string, objVisibility: boolean) {
         this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
             var msg = ev.detail;
@@ -60,9 +82,19 @@ export default class NFTaddTJS {
             mesh.visible = objVisibility;
         });
         this.names.push(name);
-        this.entities.push({ name, mesh });
+        this.entities.push({ name });
     }
 
+    /**
+     * The addModel function will add a model to the Renderer root. You need to associate a name of the Entity.
+     * @param url url of the model.
+     * @param name the name of the Entity associated.
+     * @param x model x position.
+     * @param y model y position.
+     * @param z model z position.
+     * @param scale scale of the model.
+     * @param objVisibility set true or false if the mesh wll stay visible or not after tracking.
+     */
     public addModel(url: string, name: string, x: number, y: number, z: number, scale: number, objVisibility: boolean) {
         const root = new Object3D();
         root.name = "root-" + name;
@@ -92,6 +124,16 @@ export default class NFTaddTJS {
         });
         this.names.push(name);
     }
+
+    /**
+     * The addImage function will add an image to the Renderer root. You need to associate a name of the Entity.
+     * @param imageUrl url of the image.
+     * @param name the name of the Entity associated.
+     * @param color color of the background plane.
+     * @param scale scale of the plane.
+     * @param configs see IPlaneConfig.
+     * @param objVisibility set true or false if the mesh wll stay visible or not after tracking.
+     */
     public addImage(
         imageUrl: string,
         name: string,
@@ -127,6 +169,15 @@ export default class NFTaddTJS {
         });
         this.names.push(name);
     }
+
+    /**
+     * The addVideo function will add a video to the Renderer root. You need to associate a name of the Entity.
+     * @param id the id of the html video element.
+     * @param name the name of the Entity associated.
+     * @param scale scale of the plane.
+     * @param configs see IPlaneConfig.
+     * @param objVisibility set true or false if the mesh wll stay visible or not after tracking.
+     */
     public addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean) {
         const root = new Object3D();
         root.name = "root-" + name;
