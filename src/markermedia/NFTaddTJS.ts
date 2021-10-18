@@ -35,7 +35,6 @@ export default class NFTaddTJS {
         });
         const root = new Object3D();
         root.name = "root-" + name;
-        root.matrixAutoUpdate = false;
         this.scene.add(root);
         root.add(mesh);
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
@@ -50,7 +49,10 @@ export default class NFTaddTJS {
             root.position.setX((filter[0].x));
             root.position.setY((filter[0].y));
             root.position.setZ((filter[0].z));
-            root.rotation.setFromVector3(filter[1])
+            root.rotation.setFromVector3(filter[1]);
+            root.scale.setX((filter[2].x));
+            root.scale.setY((filter[2].y));
+            root.scale.setZ((filter[2].z));
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
