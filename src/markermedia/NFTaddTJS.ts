@@ -1,4 +1,4 @@
-import { AnimationMixer, Object3D, PlaneGeometry, Scene, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial } from "three";
+import { AnimationMixer, Clock, Object3D, PlaneGeometry, Scene, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial, NormalAnimationBlendMode } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
 import SceneRendererTJS from "../SceneRendererTJS";
@@ -42,6 +42,8 @@ export default class NFTaddTJS {
     private scene: Scene;
     private target: EventTarget;
     private uuid: string;
+    private static mixers: { update: (arg0: number) => void; }[];
+    private static clock: any = new Clock();
 
     /**
      * The NFTaddTJS constuctor, you need to pass the uuid from the ARnft instance.
@@ -52,6 +54,7 @@ export default class NFTaddTJS {
         this.target = window || global;
         this.uuid = uuid;
         this.names = [];
+        NFTaddTJS.mixers = [];;
     }
 
     /**
@@ -101,7 +104,6 @@ export default class NFTaddTJS {
         root.matrixAutoUpdate = false;
         this.scene.add(root);
         let model: any;
-        let mixers = [];
         /* Load Model */
         const threeGLTFLoader = new GLTFLoader();
         threeGLTFLoader.load(url, (gltf) => {
@@ -111,11 +113,15 @@ export default class NFTaddTJS {
             model.position.x = x;
             model.position.y = y;
             model.position.z = z;
-            var animation = gltf.animations[0];
-            var mixer = new AnimationMixer(model);
-            mixers.push(mixer);
-            var action = mixer.clipAction(animation);
-            action.play();
+            if (gltf.animations[0]){    
+                var animation = gltf.animations[0];
+                console.log(animation);
+                var mixer = new AnimationMixer(model);
+                NFTaddTJS.mixers.push(mixer);
+                console.log(NFTaddTJS.mixers);            
+                var action = mixer.clipAction(animation);
+                action.play();
+            }
             root.add(model);
         });
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
@@ -218,4 +224,12 @@ export default class NFTaddTJS {
     public getNames() {
         return this.names;
     }
+
+    public updateAnimations(): void {     
+        if (NFTaddTJS.mixers.length > 0) {
+            for (var i = 0; i < NFTaddTJS.mixers.length; i++) {
+                NFTaddTJS.mixers[i].update(NFTaddTJS.clock.getDelta());
+            }
+        }
+    };
 }
