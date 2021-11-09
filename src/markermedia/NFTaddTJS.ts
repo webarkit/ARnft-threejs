@@ -1,4 +1,4 @@
-import { Object3D, PlaneGeometry, Scene, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial } from "three";
+import { AnimationMixer, Object3D, PlaneGeometry, Scene, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
 import SceneRendererTJS from "../SceneRendererTJS";
@@ -101,6 +101,7 @@ export default class NFTaddTJS {
         root.matrixAutoUpdate = false;
         this.scene.add(root);
         let model: any;
+        let mixers = [];
         /* Load Model */
         const threeGLTFLoader = new GLTFLoader();
         threeGLTFLoader.load(url, (gltf) => {
@@ -110,6 +111,11 @@ export default class NFTaddTJS {
             model.position.x = x;
             model.position.y = y;
             model.position.z = z;
+            var animation = gltf.animations[0];
+            var mixer = new AnimationMixer(model);
+            mixers.push(mixer);
+            var action = mixer.clipAction(animation);
+            action.play();
             root.add(model);
         });
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
