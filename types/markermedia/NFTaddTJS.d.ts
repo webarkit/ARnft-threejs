@@ -19,6 +19,6 @@ export default class NFTaddTJS {
     addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     getNames(): string[];
-    updateAnimations(): void;
+    updateAnimations(): any;
 }
 export {};

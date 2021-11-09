@@ -225,11 +225,12 @@ export default class NFTaddTJS {
         return this.names;
     }
 
-    public updateAnimations(): void {     
+    public updateAnimations(): any {  
         if (NFTaddTJS.mixers.length > 0) {
             for (var i = 0; i < NFTaddTJS.mixers.length; i++) {
                 NFTaddTJS.mixers[i].update(NFTaddTJS.clock.getDelta());
             }
         }
+        //requestAnimationFrame(this.updateAnimations())
     };
 }
