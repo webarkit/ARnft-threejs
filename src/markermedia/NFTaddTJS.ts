@@ -95,7 +95,7 @@ export default class NFTaddTJS {
      * @param scale scale of the model.
      * @param objVisibility set true or false if the mesh wll stay visible or not after tracking.
      */
-    public addModel(url: string, name: string, x: number, y: number, z: number, scale: number, objVisibility: boolean) {
+    public addModel(url: string, name: string, scale: number, callback: (model: any) =>{} , objVisibility: boolean) {
         const root = new Object3D();
         root.name = "root-" + name;
         root.matrixAutoUpdate = false;
@@ -107,9 +107,12 @@ export default class NFTaddTJS {
             model = gltf.scene;
             model.scale.set(scale, scale, scale);
             model.rotation.x = Math.PI / 2;
-            model.position.x = x;
-            model.position.y = y;
-            model.position.z = z;
+            this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
+                var msg = ev.detail;
+                model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
+                model.position.z = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
+            });
+            callback(model)
             root.add(model);
         });
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
