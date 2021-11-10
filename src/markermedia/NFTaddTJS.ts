@@ -135,7 +135,7 @@ export default class NFTaddTJS {
      public addModelWithCallback(url: string, name: string, callback: (gltf: any) =>{} , objVisibility: boolean) {
         const root = new Object3D();
         root.name = "root-" + name;
-        root.matrixAutoUpdate = false;
+        //root.matrixAutoUpdate = false;
         this.scene.add(root);
         let model: any;
         /* Load Model */
@@ -147,7 +147,8 @@ export default class NFTaddTJS {
                 model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
                 model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
             });
-            callback(gltf)
+            callback(gltf);
+            root.matrixAutoUpdate = false;
             root.add(model);
         });
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
