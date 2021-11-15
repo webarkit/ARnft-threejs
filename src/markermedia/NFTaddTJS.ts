@@ -102,13 +102,10 @@ export default class NFTaddTJS {
      * The addModel function will add a model to the Renderer root. You need to associate a name of the Entity.
      * @param url url of the model.
      * @param name the name of the Entity associated.
-     * @param x model x position.
-     * @param y model y position.
-     * @param z model z position.
      * @param scale scale of the model.
      * @param objVisibility set true or false if the mesh wll stay visible or not after tracking.
      */
-    public addModel(url: string, name: string, x: number, y: number, z: number, scale: number, objVisibility: boolean) {
+    public addModel(url: string, name: string, scale: number, objVisibility: boolean) {
         const root = new Object3D();
         root.name = "root-" + name;
         root.matrixAutoUpdate = false;
@@ -120,9 +117,50 @@ export default class NFTaddTJS {
             model = gltf.scene;
             model.scale.set(scale, scale, scale);
             model.rotation.x = Math.PI / 2;
-            model.position.x = x;
-            model.position.y = y;
-            model.position.z = z;
+            this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
+                var msg = ev.detail;
+                model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
+                model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
+            });
+            root.add(model);
+        });
+        this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
+            root.visible = true;
+            model.visible = true;
+            const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
+            Utils.setMatrix(root.matrix, matrix);
+        });
+        this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
+            root.visible = objVisibility;
+            model.visible = objVisibility;
+        });
+        this.names.push(name);
+    }
+
+    /**
+     * The addModelWithCallback function will add a model to the Renderer root. You need to associate a name of the Entity.
+     * You can modify the model rotation, scale and other properties with the callback.
+     * @param url url of the model.
+     * @param name the name of the Entity associated.
+     * @param callback modify the model in the callback.
+     * @param objVisibility set true or false if the mesh wll stay visible or not after tracking.
+     */
+     public addModelWithCallback(url: string, name: string, callback: (gltf: any) =>{} , objVisibility: boolean) {
+        const root = new Object3D();
+        root.name = "root-" + name;
+        root.matrixAutoUpdate = false;
+        this.scene.add(root);
+        let model: any;
+        /* Load Model */
+        const threeGLTFLoader = new GLTFLoader();
+        threeGLTFLoader.load(url, (gltf) => {
+            model = gltf.scene;
+            this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
+                var msg = ev.detail;
+                model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
+                model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
+            });
+            callback(gltf);
             root.add(model);
         });
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
