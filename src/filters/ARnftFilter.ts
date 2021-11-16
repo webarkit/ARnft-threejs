@@ -42,27 +42,16 @@ export class ARnftFilter {
             this._hasFound = false;
             this._frameDrops = 0;
         } else {
-            
-            //let worldMatrix: Matrix = Matrix.FromArray(this.getArrayMatrix(this.world));
             let matrixW: Matrix4 = new Matrix4();
             let worldMatrix: Matrix4 = matrixW.fromArray(this.getArrayMatrix(world));
-
-
             if (!this._hasFound) {
-                // for (var i = 0; i < 16; i++) {
-                //     this.trackedMatrix.interpolated[i] = this.world[i];
-                // }
                 this._hasFound = true;
                 let vecTrans: Vector3 = new Vector3()
-                ///this._lastTranslation = worldMatrix.getTranslation(); // Babylon code...
                 this._lastTranslation = vecTrans.setFromMatrixPosition(worldMatrix)
             }
             else {
                 let vecTrans: Vector3 = new Vector3()
-                //let _currentTranslation: Vector3 = worldMatrix.getTranslation(); // Babylon code...
                 let _currentTranslation: Vector3 = vecTrans.setFromMatrixPosition(worldMatrix)
-
-                //if (Math.abs(Vector3.Distance(_currentTranslation, this._lastTranslation)) > this._deltaAccuracy) { //Babylon code...
                 if (Math.abs(_currentTranslation.distanceTo(this._lastTranslation)) > this._deltaAccuracy) {
                     this._frameDrops += 1;
                     if (this._frameDrops > 3) {
@@ -72,56 +61,26 @@ export class ARnftFilter {
                 }
                 this._frameDrops = 0;
                 this._lastTranslation = _currentTranslation;
-                // for (var i = 0; i < 16; i++) {
-                //     this.trackedMatrix.delta[i] = this.world[i] - this.trackedMatrix.interpolated[i];
-                //     this.trackedMatrix.interpolated[i] = this.trackedMatrix.interpolated[i] + (this.trackedMatrix.delta[i] / this._interpolationFactor);
-                // }
             }
-            // let matrix: Matrix = Matrix.FromArray(this.getArrayMatrix(this.world));
-
             this._positionFilter.UpdateParams(this.filterFrequency, this.filterMinCutoff, this.filterBeta, this.filterDcutoff);
             this._rotationFilter.UpdateParams(this.filterFrequency * 2, this.filterMinCutoff, this.filterBeta, this.filterDcutoff);
-
-            //let matrix: Matrix = worldMatrix;  //Babylon code...
             let matrix: Matrix4 = new Matrix4();
             
             matrix = worldMatrix;
 
-
-            //let rotMatrix: Matrix = matrix.getRotationMatrix();
-            //let rotMatrix: Matrix4 = new Matrix4(); // this is not neede because we decompose the matrix
-            //rotMatrix.extractRotation(matrix);
-            //let rotation: Quaternion = new Quaternion().setFromRotationMatrix(rotMatrix); //this is wrong , will do nothing!
             let rotation: Quaternion = new Quaternion()
-            ///this._root.rotation = this._rotationFilter.Filter(rotation.toEulerAngles()); // Babylon code
-            //let rotationVec: Vector3 = new Vector3();
             let eulerRot: Euler = new Euler();
-            //eulerRot.setFromQuaternion(rotation)
-            //rotationVec = this._rotationFilter.Filter(rotation.toEulerAngles()); // Babylon code
-            //rotationVec = this._rotationFilter.Filter(eulerRot.toVector3());
-
-            // or even simple decompose the worldMatrix into position, quaternion and scale with decompose
             let position: Vector3 = new Vector3(0, 0, 0);
-            //let scale: Vector3 = new Vector3();
+
+            // or even simple decompose the worldMatrix into position, quaternion and scale with decompose   
             worldMatrix.decompose(position, rotation, scale)
             let eRot = eulerRot.setFromQuaternion(rotation)
             rotationVec = this._rotationFilter.Filter(eRot.toVector3());
 
-            //let pos = Vector3.TransformCoordinates(new Vector3(0, 0, 0), matrix);
-
-            //this._root.setAbsolutePosition(this._positionFilter.Filter(position));
-            //let pos: Vector3 = new Vector3(0,0,0);
-            console.log('pos is: ', pos);
+            //console.log('pos is: ', pos);
             
             pos = this._positionFilter.Filter(position)
-            console.log('position is:', pos);        
-            /*let out: Matrix4 = new Matrix4();
-            let rotationMatrix = new Matrix4();
-            //rotationMatrix.makeRotationFromQuaternion()
-            let finalRot = new Quaternion();
-            finalRot.setFromRotationMatrix(rotationMatrix)*/
-            //out.compose(pos, ) /// will see if output the matrix in a future...
-            //return [pos, rotationVec, scale]
+            //console.log('position is:', pos);        
         }
         return [pos, rotationVec, scale]
     }
