@@ -73,11 +73,23 @@ export default class NFTaddTJS {
         root.name = "root-" + name;
         this.scene.add(root);
         root.add(mesh);
+        //let filter = [new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(0,0,0)];
+        //console.log(filter);
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             mesh.visible = true;
+            console.log('matrix GL_RH: ', ev.detail.matrixGL_RH);
+            if(ev.detail.matrixGL_RH === 'undefinded'){
+                console.log('matrix is undefined');
+                
+            }
+            let filter = [new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(0,0,0)];
+            console.log(filter);
+            
 
-            let filter = this._filter.update(ev.detail.matrixGL_RH)
+            filter = this._filter.update(ev.detail.matrixGL_RH)
+            console.log('filter is: ', filter);
+            
 
             console.log("position from filter is: ", filter[0]);
             console.log("rotation from filter is: ", filter[1]);
