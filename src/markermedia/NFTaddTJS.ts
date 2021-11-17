@@ -1,7 +1,16 @@
-import { Object3D, PlaneGeometry, Scene, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial, Vector3 } from "three";
+import {
+    Object3D,
+    PlaneGeometry,
+    Scene,
+    TextureLoader,
+    VideoTexture,
+    Mesh,
+    MeshStandardMaterial,
+    Vector3,
+} from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
-import { ARnftFilter } from '../filters/ARnftFilter'
+import { ARnftFilter } from "../filters/ARnftFilter";
 import SceneRendererTJS from "../SceneRendererTJS";
 
 /**
@@ -78,20 +87,20 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             mesh.visible = true;
-            if(this._oef === true) {
-                let filter = [new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(0,0,0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH)       
-                root.position.setX((filter[0].x));
-                root.position.setY((filter[0].y));
-                root.position.setZ((filter[0].z));
+            if (this._oef === true) {
+                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                filter = this._filter.update(ev.detail.matrixGL_RH);
+                root.position.setX(filter[0].x);
+                root.position.setY(filter[0].y);
+                root.position.setZ(filter[0].z);
                 root.rotation.setFromVector3(filter[1]);
-                root.scale.setX((filter[2].x));
-                root.scale.setY((filter[2].y));
-                root.scale.setZ((filter[2].z)); 
+                root.scale.setX(filter[2].x);
+                root.scale.setY(filter[2].y);
+                root.scale.setZ(filter[2].z);
             } else {
-                root.matrixAutoUpdate = false;         
+                root.matrixAutoUpdate = false;
                 const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix); 
+                Utils.setMatrix(root.matrix, matrix);
             }
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
@@ -130,20 +139,20 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             model.visible = true;
-            if(this._oef === true) {
-                let filter = [new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(0,0,0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH)    
-                root.position.setX((filter[0].x));
-                root.position.setY((filter[0].y));
-                root.position.setZ((filter[0].z));
+            if (this._oef === true) {
+                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                filter = this._filter.update(ev.detail.matrixGL_RH);
+                root.position.setX(filter[0].x);
+                root.position.setY(filter[0].y);
+                root.position.setZ(filter[0].z);
                 root.rotation.setFromVector3(filter[1]);
-                root.scale.setX((filter[2].x));
-                root.scale.setY((filter[2].y));
-                root.scale.setZ((filter[2].z)); 
+                root.scale.setX(filter[2].x);
+                root.scale.setY(filter[2].y);
+                root.scale.setZ(filter[2].z);
             } else {
-                root.matrixAutoUpdate = false;         
+                root.matrixAutoUpdate = false;
                 const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix); 
+                Utils.setMatrix(root.matrix, matrix);
             }
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
@@ -161,7 +170,7 @@ export default class NFTaddTJS {
      * @param callback modify the model in the callback.
      * @param objVisibility set true or false if the mesh wll stay visible or not after tracking.
      */
-     public addModelWithCallback(url: string, name: string, callback: (gltf: any) =>{} , objVisibility: boolean) {
+    public addModelWithCallback(url: string, name: string, callback: (gltf: any) => {}, objVisibility: boolean) {
         const root = new Object3D();
         root.name = "root-" + name;
         this.scene.add(root);
@@ -181,20 +190,20 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             model.visible = true;
-            if(this._oef === true) {
-                let filter = [new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(0,0,0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH)  
-                root.position.setX((filter[0].x));
-                root.position.setY((filter[0].y));
-                root.position.setZ((filter[0].z));
+            if (this._oef === true) {
+                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                filter = this._filter.update(ev.detail.matrixGL_RH);
+                root.position.setX(filter[0].x);
+                root.position.setY(filter[0].y);
+                root.position.setZ(filter[0].z);
                 root.rotation.setFromVector3(filter[1]);
-                root.scale.setX((filter[2].x));
-                root.scale.setY((filter[2].y));
-                root.scale.setZ((filter[2].z)); 
+                root.scale.setX(filter[2].x);
+                root.scale.setY(filter[2].y);
+                root.scale.setZ(filter[2].z);
             } else {
-                root.matrixAutoUpdate = false;         
+                root.matrixAutoUpdate = false;
                 const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix); 
+                Utils.setMatrix(root.matrix, matrix);
             }
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
@@ -238,20 +247,20 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             plane.visible = true;
-            if(this._oef === true) {
-                let filter = [new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(0,0,0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH)
-                root.position.setX((filter[0].x));
-                root.position.setY((filter[0].y));
-                root.position.setZ((filter[0].z));
+            if (this._oef === true) {
+                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                filter = this._filter.update(ev.detail.matrixGL_RH);
+                root.position.setX(filter[0].x);
+                root.position.setY(filter[0].y);
+                root.position.setZ(filter[0].z);
                 root.rotation.setFromVector3(filter[1]);
-                root.scale.setX((filter[2].x));
-                root.scale.setY((filter[2].y));
-                root.scale.setZ((filter[2].z)); 
+                root.scale.setX(filter[2].x);
+                root.scale.setY(filter[2].y);
+                root.scale.setZ(filter[2].z);
             } else {
-                root.matrixAutoUpdate = false;         
+                root.matrixAutoUpdate = false;
                 const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix); 
+                Utils.setMatrix(root.matrix, matrix);
             }
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
@@ -289,20 +298,20 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             plane.visible = true;
-            if(this._oef === true) {
-                let filter = [new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(0,0,0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH)             
-                root.position.setX((filter[0].x));
-                root.position.setY((filter[0].y));
-                root.position.setZ((filter[0].z));
+            if (this._oef === true) {
+                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                filter = this._filter.update(ev.detail.matrixGL_RH);
+                root.position.setX(filter[0].x);
+                root.position.setY(filter[0].y);
+                root.position.setZ(filter[0].z);
                 root.rotation.setFromVector3(filter[1]);
-                root.scale.setX((filter[2].x));
-                root.scale.setY((filter[2].y));
-                root.scale.setZ((filter[2].z)); 
+                root.scale.setX(filter[2].x);
+                root.scale.setY(filter[2].y);
+                root.scale.setZ(filter[2].z);
             } else {
-                root.matrixAutoUpdate = false;         
+                root.matrixAutoUpdate = false;
                 const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix); 
+                Utils.setMatrix(root.matrix, matrix);
             }
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
@@ -320,14 +329,14 @@ export default class NFTaddTJS {
         return this.names;
     }
 
-    /** 
+    /**
      * Enable or not the OneEuroFilter routine.
      */
     public set oef(enable: boolean) {
         this._oef = enable;
     }
 
-    /** 
+    /**
      * Check if OneEuroFilter is enabled or not.
      * @returns (boolean) true or false
      */

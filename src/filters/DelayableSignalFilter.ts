@@ -1,7 +1,6 @@
 import { getTime } from "../utils/Utils";
 
 export class DelayableSignalFilter {
-
     private _inDelay: boolean;
     private _totalTime: number;
     private _prevTime: number;
@@ -36,5 +35,4 @@ export class DelayableSignalFilter {
 
         return false;
     }
-
 }

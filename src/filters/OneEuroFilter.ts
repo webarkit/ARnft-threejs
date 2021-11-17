@@ -95,7 +95,6 @@ export default class OneEuroFilter {
     }
 
     public Filter(x: number, timestamp: number | null = null): number {
-
         this.prevValue = this.currValue;
         if (this.lasttime && timestamp) {
             this.freq = 1.0 / (timestamp - this.lasttime);
@@ -105,12 +104,11 @@ export default class OneEuroFilter {
         const dx = !prevX ? 0.0 : (x - prevX) * this.freq;
         const edx = this.dx.filter(dx, timestamp!, this.alpha(this.dCutOff));
         const cutOff = this.minCutOff + this.beta * Math.abs(edx);
-        return this.currValue = this.x.filter(x, timestamp!, this.alpha(cutOff));
+        return (this.currValue = this.x.filter(x, timestamp!, this.alpha(cutOff)));
     }
 }
 
 export class OneEuroFilterVector3 {
-
     // containst the type of T
     // the array of filters
     private oneEuroFilters: Array<OneEuroFilter>;
@@ -134,7 +132,6 @@ export class OneEuroFilterVector3 {
         return this._mincutoff;
     }
 
-
     // currValue contains the latest value which have been succesfully filtered
     // prevValue contains the previous filtered value
 
@@ -143,8 +140,6 @@ export class OneEuroFilterVector3 {
 
     // initialization of our filter(s)
     constructor(_freq: number, _mincutoff: number = 1, _beta: number = 0, _dcutoff: number = 1) {
-
-
         this.currValue = new Vector3();
         this.prevValue = new Vector3();
 
@@ -154,9 +149,9 @@ export class OneEuroFilterVector3 {
         this._dcutoff = _dcutoff;
 
         this.oneEuroFilters = [];
-        this.oneEuroFilters.push(new OneEuroFilter(_freq, _mincutoff, _beta, _dcutoff))
-        this.oneEuroFilters.push(new OneEuroFilter(_freq, _mincutoff, _beta, _dcutoff))
-        this.oneEuroFilters.push(new OneEuroFilter(_freq, _mincutoff, _beta, _dcutoff))
+        this.oneEuroFilters.push(new OneEuroFilter(_freq, _mincutoff, _beta, _dcutoff));
+        this.oneEuroFilters.push(new OneEuroFilter(_freq, _mincutoff, _beta, _dcutoff));
+        this.oneEuroFilters.push(new OneEuroFilter(_freq, _mincutoff, _beta, _dcutoff));
     }
 
     // updates the filter parameters
@@ -169,7 +164,6 @@ export class OneEuroFilterVector3 {
         for (let i: number = 0; i < this.oneEuroFilters.length; i++)
             this.oneEuroFilters[i].UpdateParams(this._freq, this._mincutoff, this._beta, this._dcutoff);
     }
-
 
     // filters the provided _value and returns the result.
     // Note: a timestamp can also be provided - will override filter frequency.
@@ -185,10 +179,10 @@ export class OneEuroFilterVector3 {
 
         this.oneEuroFilters.forEach((filters, idx) => {
             output[idx] = filters.Filter(input[idx], timestamp);
-        })
+        });
 
         let arr: Vector3 = new Vector3();
 
-        return this.currValue = arr.fromArray(output);
+        return (this.currValue = arr.fromArray(output));
     }
 }

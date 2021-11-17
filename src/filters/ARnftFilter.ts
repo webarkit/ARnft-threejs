@@ -37,7 +37,7 @@ export class ARnftFilter {
     public update(world: any): Vector3[] {
         let pos: Vector3 = new Vector3();
         let rotationVec: Vector3 = new Vector3();
-        let scale: Vector3 = new Vector3();  
+        let scale: Vector3 = new Vector3();
         if (!world) {
             this._hasFound = false;
             this._frameDrops = 0;
@@ -46,12 +46,11 @@ export class ARnftFilter {
             let worldMatrix: Matrix4 = matrixW.fromArray(this.getArrayMatrix(world));
             if (!this._hasFound) {
                 this._hasFound = true;
-                let vecTrans: Vector3 = new Vector3()
-                this._lastTranslation = vecTrans.setFromMatrixPosition(worldMatrix)
-            }
-            else {
-                let vecTrans: Vector3 = new Vector3()
-                let _currentTranslation: Vector3 = vecTrans.setFromMatrixPosition(worldMatrix)
+                let vecTrans: Vector3 = new Vector3();
+                this._lastTranslation = vecTrans.setFromMatrixPosition(worldMatrix);
+            } else {
+                let vecTrans: Vector3 = new Vector3();
+                let _currentTranslation: Vector3 = vecTrans.setFromMatrixPosition(worldMatrix);
                 if (Math.abs(_currentTranslation.distanceTo(this._lastTranslation)) > this._deltaAccuracy) {
                     this._frameDrops += 1;
                     if (this._frameDrops > 3) {
@@ -62,24 +61,34 @@ export class ARnftFilter {
                 this._frameDrops = 0;
                 this._lastTranslation = _currentTranslation;
             }
-            this._positionFilter.UpdateParams(this.filterFrequency, this.filterMinCutoff, this.filterBeta, this.filterDcutoff);
-            this._rotationFilter.UpdateParams(this.filterFrequency * 2, this.filterMinCutoff, this.filterBeta, this.filterDcutoff);
+            this._positionFilter.UpdateParams(
+                this.filterFrequency,
+                this.filterMinCutoff,
+                this.filterBeta,
+                this.filterDcutoff
+            );
+            this._rotationFilter.UpdateParams(
+                this.filterFrequency * 2,
+                this.filterMinCutoff,
+                this.filterBeta,
+                this.filterDcutoff
+            );
             let matrix: Matrix4 = new Matrix4();
-            
+
             matrix = worldMatrix;
 
-            let rotation: Quaternion = new Quaternion()
+            let rotation: Quaternion = new Quaternion();
             let eulerRot: Euler = new Euler();
             let position: Vector3 = new Vector3(0, 0, 0);
 
-            // or even simple decompose the worldMatrix into position, quaternion and scale with decompose   
-            worldMatrix.decompose(position, rotation, scale)
-            let eRot = eulerRot.setFromQuaternion(rotation)
+            // or even simple decompose the worldMatrix into position, quaternion and scale with decompose
+            worldMatrix.decompose(position, rotation, scale);
+            let eRot = eulerRot.setFromQuaternion(rotation);
             rotationVec = this._rotationFilter.Filter(eRot.toVector3());
-            
-            pos = this._positionFilter.Filter(position)       
+
+            pos = this._positionFilter.Filter(position);
         }
-        return [pos, rotationVec, scale]
+        return [pos, rotationVec, scale];
     }
     protected getArrayMatrix(value: any): any {
         var array: any = [];
