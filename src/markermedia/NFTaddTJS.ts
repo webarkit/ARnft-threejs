@@ -295,7 +295,7 @@ export default class NFTaddTJS {
         });
         root.add(plane);
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
-            ARVideo.play()
+            ARVideo.play();
             root.visible = true;
             plane.visible = true;
             if (this._oef === true) {
@@ -317,7 +317,7 @@ export default class NFTaddTJS {
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
             plane.visible = objVisibility;
-            ARVideo.pause()
+            ARVideo.pause();
         });
         this.names.push(name);
     }
