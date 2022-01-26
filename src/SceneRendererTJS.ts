@@ -80,7 +80,7 @@ export default class SceneRendererTJS {
         } else {
             this.camera = new THREE.Camera();
         }
-        this.version = "0.4.5";
+        this.version = "0.4.6";
         console.log("ARnftThreejs version: ", this.version);
     }
 

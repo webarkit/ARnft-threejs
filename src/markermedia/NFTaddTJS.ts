@@ -285,7 +285,6 @@ export default class NFTaddTJS {
         const ARVideo: HTMLVideoElement = document.getElementById(id) as HTMLVideoElement;
         const texture = new VideoTexture(ARVideo as HTMLVideoElement);
         const mat = new MeshStandardMaterial({ color: 0xbbbbff, map: texture });
-        ARVideo.play();
         const planeGeom = new PlaneGeometry(configs.w, configs.h, configs.ws, configs.hs);
         const plane = new Mesh(planeGeom, mat);
         plane.scale.set(scale, scale, scale);
@@ -296,6 +295,7 @@ export default class NFTaddTJS {
         });
         root.add(plane);
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
+            ARVideo.play();
             root.visible = true;
             plane.visible = true;
             if (this._oef === true) {
@@ -317,6 +317,7 @@ export default class NFTaddTJS {
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
             plane.visible = objVisibility;
+            ARVideo.pause();
         });
         this.names.push(name);
     }
