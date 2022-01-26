@@ -322,6 +322,11 @@ export default class NFTaddTJS {
         this.names.push(name);
     }
 
+    public remove(name: string) {
+        let obj = this.scene.getObjectByName('root-' + name)
+        this.scene.remove(obj);
+    }
+
     /**
      * You can get the names of the entities used in your project.
      * @returns the names of the entities

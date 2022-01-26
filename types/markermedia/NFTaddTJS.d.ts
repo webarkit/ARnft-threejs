@@ -19,6 +19,7 @@ export default class NFTaddTJS {
     addModelWithCallback(url: string, name: string, callback: (gltf: any) => {}, objVisibility: boolean): void;
     addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
+    remove(name: string): void;
     getNames(): string[];
     set oef(enable: boolean);
     get oef(): boolean;
