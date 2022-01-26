@@ -1,3 +1,4 @@
+export declare function getTime(): number;
 export declare class Utils {
     private static trackedMatrix;
     static interpolate(world: any): any;
