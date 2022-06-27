@@ -283,6 +283,7 @@ export default class NFTaddTJS {
         root.name = "root-" + name;
         this.scene.add(root);
         const ARVideo: HTMLVideoElement = document.getElementById(id) as HTMLVideoElement;
+        const playPromise: Promise<any> = ARVideo.play();
         const texture = new VideoTexture(ARVideo as HTMLVideoElement);
         const mat = new MeshStandardMaterial({ color: 0xbbbbff, map: texture });
         const planeGeom = new PlaneGeometry(configs.w, configs.h, configs.ws, configs.hs);
@@ -295,7 +296,18 @@ export default class NFTaddTJS {
         });
         root.add(plane);
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
-            ARVideo.play();
+            //ARVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                  // Automatic playback started!
+                  // Show playing UI.
+                })
+                .catch(error => {
+                  // Auto-play was prevented
+                  // Show paused UI.
+                  console.error(error)
+                });
+              }
             root.visible = true;
             plane.visible = true;
             if (this._oef === true) {
@@ -317,7 +329,19 @@ export default class NFTaddTJS {
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
             plane.visible = objVisibility;
-            ARVideo.pause();
+            //ARVideo.pause();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                  // Automatic playback started!
+                  // Show playing UI.
+                  ARVideo.pause()
+                })
+                .catch(error => {
+                  // Auto-play was prevented
+                  // Show paused UI.
+                  console.error(error)
+                });
+              }
         });
         this.names.push(name);
     }
