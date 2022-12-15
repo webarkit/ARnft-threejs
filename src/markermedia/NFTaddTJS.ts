@@ -8,6 +8,7 @@ import {
     MeshStandardMaterial,
     Vector3,
 } from "three";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
 import { ARnftFilter } from "../filters/ARnftFilter";
@@ -52,6 +53,7 @@ export default class NFTaddTJS {
     private scene: Scene;
     private target: EventTarget;
     private uuid: string;
+    private fontLoader: FontLoader; 
     private _filter: ARnftFilter;
     private _oef: boolean;
 
@@ -64,6 +66,7 @@ export default class NFTaddTJS {
         this.target = window || global;
         this.uuid = uuid;
         this.names = [];
+        this.fontLoader = new FontLoader();
         this._filter = new ARnftFilter();
         this._oef = false;
     }
@@ -328,6 +331,14 @@ export default class NFTaddTJS {
      */
     public getNames() {
         return this.names;
+    }
+
+    /**
+     * You can get your fontLoader instance in your project.
+     * @returns the fontLoader instance
+     */
+    public getFontLoader() {
+        return this.fontLoader;
     }
 
     /**

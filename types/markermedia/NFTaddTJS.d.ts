@@ -1,4 +1,5 @@
 import { Object3D } from "three";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 interface IPlaneConfig {
     w: number;
     h: number;
@@ -11,6 +12,7 @@ export default class NFTaddTJS {
     private scene;
     private target;
     private uuid;
+    private fontLoader;
     private _filter;
     private _oef;
     constructor(uuid: string);
@@ -20,6 +22,7 @@ export default class NFTaddTJS {
     addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     getNames(): string[];
+    getFontLoader(): FontLoader;
     set oef(enable: boolean);
     get oef(): boolean;
 }
