@@ -83,8 +83,9 @@ export class ARnftFilter {
 
             // or even simple decompose the worldMatrix into position, quaternion and scale with decompose
             worldMatrix.decompose(position, rotation, scale);
-            let eRot = eulerRot.setFromQuaternion(rotation);
-            rotationVec = this._rotationFilter.Filter(eRot.toVector3());
+            let eRot: Euler = eulerRot.setFromQuaternion(rotation);
+            let eulerToVector3: Vector3 = new Vector3();
+            rotationVec = this._rotationFilter.Filter(eulerToVector3.setFromEuler(eRot));
 
             pos = this._positionFilter.Filter(position);
         }
