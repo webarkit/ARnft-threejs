@@ -6,11 +6,9 @@ import {
     VideoTexture,
     Mesh,
     MeshStandardMaterial,
-    Vector3,
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
-import { ARnftFilter } from "../filters/ARnftFilter";
 import SceneRendererTJS from "../SceneRendererTJS";
 
 /**
@@ -52,8 +50,6 @@ export default class NFTaddTJS {
     private scene: Scene;
     private target: EventTarget;
     private uuid: string;
-    private _filter: ARnftFilter;
-    private _oef: boolean;
 
     /**
      * The NFTaddTJS constuctor, you need to pass the uuid from the ARnft instance.
@@ -64,8 +60,6 @@ export default class NFTaddTJS {
         this.target = window || global;
         this.uuid = uuid;
         this.names = [];
-        this._filter = new ARnftFilter();
-        this._oef = false;
     }
 
     /**
@@ -84,24 +78,11 @@ export default class NFTaddTJS {
         root.name = "root-" + name;
         this.scene.add(root);
         root.add(mesh);
-        this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
+        this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {           
             root.visible = true;
             mesh.visible = true;
-            if (this._oef === true) {
-                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH);
-                root.position.setX(filter[0].x);
-                root.position.setY(filter[0].y);
-                root.position.setZ(filter[0].z);
-                root.rotation.setFromVector3(filter[1]);
-                root.scale.setX(filter[2].x);
-                root.scale.setY(filter[2].y);
-                root.scale.setZ(filter[2].z);
-            } else {
-                root.matrixAutoUpdate = false;
-                const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix);
-            }
+            root.matrixAutoUpdate = false;
+            Utils.setMatrix(root.matrix, ev.detail.matrixGL_RH);
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
@@ -139,21 +120,8 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             model.visible = true;
-            if (this._oef === true) {
-                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH);
-                root.position.setX(filter[0].x);
-                root.position.setY(filter[0].y);
-                root.position.setZ(filter[0].z);
-                root.rotation.setFromVector3(filter[1]);
-                root.scale.setX(filter[2].x);
-                root.scale.setY(filter[2].y);
-                root.scale.setZ(filter[2].z);
-            } else {
-                root.matrixAutoUpdate = false;
-                const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix);
-            }
+            root.matrixAutoUpdate = false;
+            Utils.setMatrix(root.matrix, ev.detail.matrixGL_RH);
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
@@ -190,21 +158,8 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             model.visible = true;
-            if (this._oef === true) {
-                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH);
-                root.position.setX(filter[0].x);
-                root.position.setY(filter[0].y);
-                root.position.setZ(filter[0].z);
-                root.rotation.setFromVector3(filter[1]);
-                root.scale.setX(filter[2].x);
-                root.scale.setY(filter[2].y);
-                root.scale.setZ(filter[2].z);
-            } else {
-                root.matrixAutoUpdate = false;
-                const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix);
-            }
+            root.matrixAutoUpdate = false;
+            Utils.setMatrix(root.matrix, ev.detail.matrixGL_RH);
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
@@ -247,21 +202,8 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             plane.visible = true;
-            if (this._oef === true) {
-                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH);
-                root.position.setX(filter[0].x);
-                root.position.setY(filter[0].y);
-                root.position.setZ(filter[0].z);
-                root.rotation.setFromVector3(filter[1]);
-                root.scale.setX(filter[2].x);
-                root.scale.setY(filter[2].y);
-                root.scale.setZ(filter[2].z);
-            } else {
-                root.matrixAutoUpdate = false;
-                const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix);
-            }
+            root.matrixAutoUpdate = false;
+            Utils.setMatrix(root.matrix, ev.detail.matrixGL_RH);
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
@@ -298,21 +240,8 @@ export default class NFTaddTJS {
             ARVideo.play();
             root.visible = true;
             plane.visible = true;
-            if (this._oef === true) {
-                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH);
-                root.position.setX(filter[0].x);
-                root.position.setY(filter[0].y);
-                root.position.setZ(filter[0].z);
-                root.rotation.setFromVector3(filter[1]);
-                root.scale.setX(filter[2].x);
-                root.scale.setY(filter[2].y);
-                root.scale.setZ(filter[2].z);
-            } else {
-                root.matrixAutoUpdate = false;
-                const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix);
-            }
+            root.matrixAutoUpdate = false;
+            Utils.setMatrix(root.matrix, ev.detail.matrixGL_RH);
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
@@ -333,7 +262,7 @@ export default class NFTaddTJS {
     /**
      * Enable or not the OneEuroFilter routine.
      */
-    public set oef(enable: boolean) {
+   /* public set oef(enable: boolean) {
         this._oef = enable;
     }
 
@@ -341,7 +270,7 @@ export default class NFTaddTJS {
      * Check if OneEuroFilter is enabled or not.
      * @returns (boolean) true or false
      */
-    public get oef() {
+    /*public get oef() {
         return this._oef;
-    }
+    }*/
 }
