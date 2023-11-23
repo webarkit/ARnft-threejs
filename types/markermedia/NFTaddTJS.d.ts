@@ -11,8 +11,6 @@ export default class NFTaddTJS {
     private scene;
     private target;
     private uuid;
-    private _filter;
-    private _oef;
     constructor(uuid: string);
     add(mesh: Object3D, name: string, objVisibility: boolean): void;
     addModel(url: string, name: string, scale: number, objVisibility: boolean): void;
@@ -20,7 +18,5 @@ export default class NFTaddTJS {
     addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     getNames(): string[];
-    set oef(enable: boolean);
-    get oef(): boolean;
 }
 export {};

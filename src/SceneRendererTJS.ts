@@ -78,7 +78,7 @@ export default class SceneRendererTJS {
                 configData.camera.far
             );
         } else {
-            this.camera = new THREE.Camera();
+            this.camera = new THREE.PerspectiveCamera();
         }
         this.version = "0.4.7";
         console.log("ARnftThreejs version: ", this.version);
