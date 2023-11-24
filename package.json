@@ -1,6 +1,6 @@
 {
   "name": "@webarkit/arnft-threejs",
-  "version": "0.4.7",
+  "version": "0.5.0",
   "description": "The ARnft rendering engine, based on Three.js",
   "main": "dist/ARnftThreejs.js",
   "types": "types/index.d.ts",
