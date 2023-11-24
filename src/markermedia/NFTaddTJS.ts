@@ -1,12 +1,4 @@
-import {
-    Object3D,
-    PlaneGeometry,
-    Scene,
-    TextureLoader,
-    VideoTexture,
-    Mesh,
-    MeshStandardMaterial,
-} from "three";
+import { Object3D, PlaneGeometry, Scene, TextureLoader, VideoTexture, Mesh, MeshStandardMaterial } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
 import SceneRendererTJS from "../SceneRendererTJS";
@@ -78,7 +70,7 @@ export default class NFTaddTJS {
         root.name = "root-" + name;
         this.scene.add(root);
         root.add(mesh);
-        this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {           
+        this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             mesh.visible = true;
             root.matrixAutoUpdate = false;
@@ -258,19 +250,4 @@ export default class NFTaddTJS {
     public getNames() {
         return this.names;
     }
-
-    /**
-     * Enable or not the OneEuroFilter routine.
-     */
-   /* public set oef(enable: boolean) {
-        this._oef = enable;
-    }
-
-    /**
-     * Check if OneEuroFilter is enabled or not.
-     * @returns (boolean) true or false
-     */
-    /*public get oef() {
-        return this._oef;
-    }*/
 }
