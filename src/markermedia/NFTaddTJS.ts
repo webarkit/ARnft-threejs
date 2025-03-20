@@ -98,7 +98,7 @@ export default class NFTaddTJS {
         let model: any;
         /* Load Model */
         const threeGLTFLoader = new GLTFLoader();
-        threeGLTFLoader.load(url, (gltf) => {
+        threeGLTFLoader.load(url, (gltf: { scene: Object3D }) => {
             model = gltf.scene;
             model.scale.set(scale, scale, scale);
             model.rotation.x = Math.PI / 2;
@@ -137,7 +137,7 @@ export default class NFTaddTJS {
         let model: any;
         /* Load Model */
         const threeGLTFLoader = new GLTFLoader();
-        threeGLTFLoader.load(url, (gltf) => {
+        threeGLTFLoader.load(url, (gltf: { scene: Object3D }) => {
             model = gltf.scene;
             this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
                 var msg = ev.detail;
@@ -229,10 +229,12 @@ export default class NFTaddTJS {
         });
         root.add(plane);
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
-            ARVideo.play();
-            root.visible = true;
-            plane.visible = true;
-            root.matrixAutoUpdate = false;
+            setTimeout(() => {
+                ARVideo.play();
+                root.visible = true;
+                plane.visible = true;
+                root.matrixAutoUpdate = false;
+            }, 100);
             Utils.setMatrix(root.matrix, ev.detail.matrixGL_RH);
         });
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
