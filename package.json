@@ -1,6 +1,6 @@
 {
   "name": "@webarkit/arnft-threejs",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "The ARnft rendering engine, based on Three.js",
   "main": "dist/ARnftThreejs.js",
   "types": "types/index.d.ts",
@@ -32,21 +32,21 @@
   },
   "homepage": "https://github.com/webarkit/ARnft-threejs#readme",
   "devDependencies": {
-    "@babel/core": "^7.23.3",
-    "@babel/plugin-transform-runtime": "^7.23.4",
+    "@babel/core": "7.28.5",
+    "@babel/plugin-transform-runtime": "7.28.5",
     "@babel/preset-env": "^7.23.3",
     "@types/node": "22.13.0",
-    "@types/three": "^0.169.0",
+    "@types/three": "0.180.0",
     "babel-loader": "10.0.0",
-    "prettier": "^3.1.0",
-    "ts-loader": "^9.5.1",
-    "typedoc": "0.28.0",
+    "prettier": "3.6.2",
+    "ts-loader": "9.5.4",
+    "typedoc": "0.28.14",
     "typescript": "^5.3.2",
-    "webpack": "^5.89.0",
+    "webpack": "5.102.1",
     "webpack-cli": "6.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.23.4",
-    "three": "0.169.0"
+    "@babel/runtime": "7.28.4",
+    "three": "0.180.0"
   }
 }
