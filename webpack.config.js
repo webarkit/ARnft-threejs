@@ -66,7 +66,7 @@ module.exports = (env, argv) => {
       type: 'module',
     },
     path: path.resolve(__dirname, 'dist'),
-    filename: 'ARnftThreejs.module.js',
+    filename: 'ARnftThreejs.mjs',
     //library: 'ARnftThreejs',
     //libraryTarget: 'umd',
     // @see: https://github.com/webpack/webpack/issues/3929
